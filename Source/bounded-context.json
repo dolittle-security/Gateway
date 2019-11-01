@@ -1,0 +1,20 @@
+
+{
+    "application": "5f688ba2-6f0a-4912-81c7-d659d197c653",
+    "boundedContext": "cca4be75-ba49-4433-83f5-3f80a084fe91",
+    "boundedContextName": "Gateway",
+    "resources": {
+      "readModels": {
+        "production": "MongoDB",
+        "development": "MongoDB"
+      },
+      "eventStore": {
+        "production": "MongoDB",
+        "development": "MongoDB"
+      }
+    },
+    "core": {
+      "language": "csharp"
+    },
+    "interaction": []
+  }
