@@ -8,7 +8,6 @@
     </PropertyGroup>
 
     <PropertyGroup>
-        <DolittleFolder>../Signin/.dolittle</DolittleFolder>
         <DolittleBoundedContextConfigPath>../bounded-context.json</DolittleBoundedContextConfigPath>
         <DolittleUseModules>False</DolittleUseModules>
         <DolittleNamespaceSegmentsToStrip/>

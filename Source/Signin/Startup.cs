@@ -10,7 +10,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 
-namespace Authenticator
+namespace Signin
 {
     public partial class Startup
     {
@@ -31,10 +31,6 @@ namespace Authenticator
             services.AddAuthentication(_ => {
             }).AddCookie("Dolittle", _ => {
                 _.Cookie.Name = "Dolittle";
-            }).AddOpenIdConnect("DolittleAD", "Dolittle AD", _ => {
-                _.SignInScheme = "ExternalProvider";
-                _.ClientId = "7cc1ec4d-b850-4f93-bbca-b3084a7f03a5";
-                _.Authority = "https://login.microsoftonline.com/381088c1-de08-4d18-9e60-bbe2c94eccb5";
             });
 
             _bootResult = services.AddDolittle(_loggerFactory);
