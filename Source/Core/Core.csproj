@@ -26,5 +26,7 @@
         <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="2.0.0" />
+        <PackageReference Include="IdentityServer4" Version="2.5.3" />
+        <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
     </ItemGroup>
 </Project>
