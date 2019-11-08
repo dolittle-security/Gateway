@@ -3,15 +3,12 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Microsoft.AspNetCore.Builder;
+using System;
 
-namespace Core.Context
+namespace Context
 {
-    public static class PortalContextMiddlewareAppExtensions
+    public class BaseDomainIsNotSuffixOfDomain : Exception
     {
-        public static void UsePortalContext(this IApplicationBuilder builder)
-        {
-            builder.UseMiddleware<PortalContextMiddelware>();
-        }
+        public BaseDomainIsNotSuffixOfDomain(string baseDomain, string domain) : base($"Base domain '{baseDomain}' is not a suffix of the domain '{domain}'.") {}
     }
 }

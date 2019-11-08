@@ -3,12 +3,15 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using System;
+using Microsoft.AspNetCore.Builder;
 
-namespace Core.Context
+namespace Context
 {
-    public class PortalBaseDomainHeaderIsNotAValidHostName : Exception
+    public static class PortalContextMiddlewareAppExtensions
     {
-        public PortalBaseDomainHeaderIsNotAValidHostName(string headerName, string value) : base($"Portal base domain header '{headerName}' is not a valid hostname. Found value: '{value}'.") {}
+        public static void UsePortalContext(this IApplicationBuilder builder)
+        {
+            builder.UseMiddleware<PortalContextMiddelware>();
+        }
     }
 }

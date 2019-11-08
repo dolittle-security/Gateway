@@ -6,7 +6,7 @@
 using System.Threading;
 using Concepts;
 
-namespace Core.Context
+namespace Context
 {
     public class PortalContextManager : IPortalContextManager
     {

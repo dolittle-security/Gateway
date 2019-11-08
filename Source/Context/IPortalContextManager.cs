@@ -5,7 +5,7 @@
 
 using Concepts;
 
-namespace Core.Context
+namespace Context
 {
     public interface IPortalContextManager
     {

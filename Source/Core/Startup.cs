@@ -5,8 +5,8 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using Autofac;
+using Context;
 using Core.Authentication;
-using Core.Context;
 using Core.Services;
 using Dolittle.Booting;
 using Dolittle.DependencyInversion.Autofac;

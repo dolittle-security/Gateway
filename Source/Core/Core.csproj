@@ -16,7 +16,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="..\Concepts\Concepts.csproj" />
+        <ProjectReference Include="../Context/Context.csproj" />
     </ItemGroup>
 
     <ItemGroup>

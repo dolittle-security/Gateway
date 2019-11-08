@@ -5,10 +5,10 @@
 
 using System;
 
-namespace Core.Context
+namespace Context
 {
-    public class PortalIdHeaderIsNotAValidGuid : Exception
+    public class DomainIsNotAValidHostName : Exception
     {
-        public PortalIdHeaderIsNotAValidGuid(string headerName, string value) : base($"Portal id header '{headerName}' is not a valid Guid. Found value: '{value}'.") {}
+        public DomainIsNotAValidHostName(string domain) : base($"Domain '{domain}' is not a valid hostname.") {}
     }
 }

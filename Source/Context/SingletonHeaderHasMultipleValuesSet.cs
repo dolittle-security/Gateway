@@ -4,11 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
+using System.Collections.Generic;
 
-namespace Core.Context
+namespace Context
 {
-    public class SingletonHeaderHasNoValueSet : Exception
+    public class SingletonHeaderHasMultipleValuesSet : Exception
     {
-        public SingletonHeaderHasNoValueSet(string headerName) : base($"Header '{headerName}' is required to have a single value set. No value was found in headers.") {}
+        public SingletonHeaderHasMultipleValuesSet(string headerName, IEnumerable<string> values) : base($"Header '{headerName}' is required to have a single value set. Multiple value was found in headers: '{string.Join("','", values)}'.") {}
     }
 }

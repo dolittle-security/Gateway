@@ -5,10 +5,10 @@
 
 using System;
 
-namespace Core.Context
+namespace Context
 {
-    public class BaseDomainIsNotSuffixOfDomain : Exception
+    public class PortalIdHeaderIsNotAValidGuid : Exception
     {
-        public BaseDomainIsNotSuffixOfDomain(string baseDomain, string domain) : base($"Base domain '{baseDomain}' is not a suffix of the domain '{domain}'.") {}
+        public PortalIdHeaderIsNotAValidGuid(string headerName, string value) : base($"Portal id header '{headerName}' is not a valid Guid. Found value: '{value}'.") {}
     }
 }
