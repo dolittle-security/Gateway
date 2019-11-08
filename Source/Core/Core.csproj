@@ -16,7 +16,7 @@
     </PropertyGroup>
 
     <ItemGroup>
-        <ProjectReference Include="../Context/Context.csproj" />
+        <ProjectReference Include="../Read/Read.csproj" />
     </ItemGroup>
 
     <ItemGroup>

@@ -8,6 +8,7 @@ using Autofac;
 using Context;
 using Core.Authentication;
 using Core.Services;
+using Dolittle.AspNetCore.Bootstrap;
 using Dolittle.Booting;
 using Dolittle.DependencyInversion.Autofac;
 using IdentityServer4.Services;
@@ -16,6 +17,11 @@ using Microsoft.AspNetCore.DataProtection;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
+using Microsoft.AspNetCore.Mvc;
+using Dolittle.Types;
+using Dolittle.Serialization.Json;
+using Dolittle.Collections;
+using Dolittle.Concepts.Serialization.Json;
 
 namespace Core
 {
@@ -61,9 +67,11 @@ namespace Core
 
             services.AddSingleton<IKeyMaterialService, KeyMaterialService>();
 
-            services.AddMvc();
-
             _bootResult = services.AddDolittle(_ => { _.TenantIdHeaderName = "Owner-Tenant-ID"; }, _loggerFactory);
+
+            services.AddMvc().AddJsonOptions(_ => {
+               _.SerializerSettings.Converters.Add(new ConceptConverter()); 
+            });
         }
 
 

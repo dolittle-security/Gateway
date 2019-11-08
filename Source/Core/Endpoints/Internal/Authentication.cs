@@ -10,7 +10,7 @@ using Dolittle.Collections;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Endpoints
+namespace Core.Endpoints.Internal
 {
     [Route("auth")]
     public class Authentication : ControllerBase

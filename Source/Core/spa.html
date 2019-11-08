@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Custom signin page</title>
+        <script src="https://ajax.aspnetcdn.com/ajax/jQuery/jquery-3.4.1.min.js" type="text/javascript"></script>
+        <script type="text/javascript">
+            $.urlParam = function (name) {
+                var results = new RegExp('[\?&]' + name + '=([^&#]*)').exec(window.location.search);
+                return (results !== null) ? results[1] || 0 : false;
+            };
+
+            $(document).ready(() => {
+                $.ajax("http://localhost:5000/api/Dolittle/Sentry/Gateway/Providers").done((content) => {
+                    content.forEach(provider => {
+                        $('div#provider-list').append(`<p><a href="http://localhost:5000/Dolittle/Sentry/Gateway/SignIn?rd=${$.urlParam("rd")}&ip${provider.id}">${provider.name}</a></p>`);
+                        console.log(provider);
+                    });
+                });
+            });
+        </script>
+    </head>
+    <body>
+        <h1>Select provider:</h1>
+        <div id="provider-list"></div>
+    </body>
+</html>
