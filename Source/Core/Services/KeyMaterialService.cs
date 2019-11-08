@@ -35,7 +35,6 @@ namespace Core.Services
             _key.KeyId = CryptoRandom.CreateUniqueId(16);
 
             _signingCredentials = new SigningCredentials(_key, "RS256");
-
         }
 
         public Task<SigningCredentials> GetSigningCredentialsAsync()

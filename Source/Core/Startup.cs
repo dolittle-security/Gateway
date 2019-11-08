@@ -5,8 +5,9 @@
 using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using Autofac;
+using Core.Authentication;
+using Core.Context;
 using Core.Services;
-using Core.TokenValidation;
 using Dolittle.Booting;
 using Dolittle.DependencyInversion.Autofac;
 using IdentityServer4.Services;
@@ -35,37 +36,36 @@ namespace Core
             JwtSecurityTokenHandler.DefaultInboundClaimTypeMap.Clear();
 
             services.AddDataProtection()
+                .AddKeyManagementOptions(_ => {
+                    
+                })
                 .SetApplicationName("Dolittle.Sentry")
                 .PersistKeysToFileSystem(new DirectoryInfo(".cookies"));
-            
-            
+
             
             services.AddAuthentication(_ => {
-                _.DefaultScheme = "Dolittle.Sentry";
-                _.DefaultAuthenticateScheme = "Dolittle.Sentry";
-                _.DefaultChallengeScheme = "Dolittle.Sentry";
-                _.DefaultForbidScheme = "Dolittle.Sentry";
-                _.DefaultSignInScheme = "Dolittle.Sentry";
-                _.DefaultSignOutScheme = "Dolittle.Sentry";
-            }).AddCookie("Dolittle.Sentry").AddScheme<LocalBearerTokenAuthenticationOptions,LocalBearerTokenAuthenticationHandler>("Dolittle.Bearer", _ => {});
+                _.DefaultScheme = CompositeAuthenticationOptions.CompositeSchemeName;
+                _.DefaultAuthenticateScheme = CompositeAuthenticationOptions.CompositeSchemeName;
+                _.DefaultForbidScheme = CompositeAuthenticationOptions.CompositeSchemeName;
+                _.DefaultSignInScheme = CompositeAuthenticationOptions.CookieSchemeName;
+                _.DefaultSignOutScheme = CompositeAuthenticationOptions.CookieSchemeName;
+            }).AddCookie(CompositeAuthenticationOptions.CookieSchemeName).AddIdentityToken(CompositeAuthenticationOptions.IdentityTokenSchemeName).AddComposite(CompositeAuthenticationOptions.CompositeSchemeName);
             
-            /*.AddLocalApi("Dolittle.Bearer", _ => {
-                _.ExpectedScope = "db9a84f6-82c2-4f07-84de-5e58607c4eb5";
-            });*/
 
             services.AddIdentityServer(_ => {
                 _.UserInteraction.ErrorUrl = "/error";
                 _.UserInteraction.LoginUrl = "/signin";
                 _.UserInteraction.LoginReturnUrlParameter = "rd";
-                _.Authentication.CookieAuthenticationScheme = "Dolittle.Sentry";
+                //_.Authentication.CookieAuthenticationScheme = "Dolittle.Sentry";
             }).AddResourceStore<ResourceStore>().AddClientStore<ClientStore>();
 
             services.AddSingleton<IKeyMaterialService, KeyMaterialService>();
 
             services.AddMvc();
 
-            _bootResult = services.AddDolittle(_loggerFactory);
+            _bootResult = services.AddDolittle(_ => { _.TenantIdHeaderName = "Owner-Tenant-ID"; }, _loggerFactory);
         }
+
 
         public void ConfigureContainer(ContainerBuilder containerBuilder)
         {
@@ -74,7 +74,8 @@ namespace Core
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseAuthentication();
+            app.UsePortalContext();
+            app.UseDolittle();
             app.UseIdentityServer();
             app.UseMvc();
         }
