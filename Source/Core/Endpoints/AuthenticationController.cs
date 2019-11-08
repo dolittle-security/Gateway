@@ -5,41 +5,31 @@
 
 using System.Threading.Tasks;
 using System.Web;
+using Core.Authentication;
 using Dolittle.Collections;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Authentication
+namespace Core.Endpoints
 {
-    //[Authorize]
     [Route("auth")]
-    public class AuthenticationController : ControllerBase
+    public class Authentication : ControllerBase
     {
         [HttpGet]
         public async Task<IActionResult> Authenticate()
         {
-            var result = await HttpContext.AuthenticateAsync("Dolittle.Sentry");
+            var result = await HttpContext.AuthenticateAsync(CompositeAuthenticationOptions.CompositeSchemeName);
             if (result.Succeeded)
             {
-                var claims = "Cookie OK!\nClaims:\n";
+                var claims = "Claims:\n";
                 result.Principal.Claims.ForEach(_ => claims += $"{_.Type}: {_.Value}\n");
                 return Ok(claims);
             }
             else
             {
-                var bearerResult = await HttpContext.AuthenticateAsync("Dolittle.Bearer");
-                if (bearerResult.Succeeded)
-                {
-                    var claims = "Bearer OK!\nClaims:\n";
-                    bearerResult.Principal.Claims.ForEach(_ => claims += $"{_.Type}: {_.Value}\n");
-                    return Ok(claims);
-                }
-                else
-                {
-                    //return Unauthorized();
-                    var url = HttpUtility.UrlEncode("/auth");
-                    return Redirect($"/signin?rd={url}");
-                }
+                //return Unauthorized();
+                var url = HttpUtility.UrlEncode("/auth");
+                return Redirect($"/signin?rd={url}");
             }
         }
     }
