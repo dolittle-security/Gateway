@@ -16,5 +16,6 @@ namespace Core.Pages
         IActionResult ChooseProvider(HttpContext context);
 
         IActionResult SpecifiedProviderDoesNotExist(HttpContext context, IdentityProviderId provider);
+        IActionResult Error(HttpContext context);
     }
 }

@@ -27,16 +27,22 @@ namespace Core.Pages
             return IndexPage();
         }
 
+        public IActionResult Error(HttpContext context)
+        {
+            _logger.Information($"Serving the Error page");
+            return IndexPage();
+        }
+
         public IActionResult NoProvidersAvailable(HttpContext context)
         {
             _logger.Information($"Serving the NoProvidersAvailable page");
-            return IndexPage();
+            return new RedirectResult("/signin/error?id=no-provider-available", false);
         }
 
         public IActionResult SpecifiedProviderDoesNotExist(HttpContext context, IdentityProviderId provider)
         {
             _logger.Information($"Serving the SpecifiedProviderDoesNotExist page");
-            return IndexPage();
+            return new RedirectResult("/signin/error?id=specified-provider-not-exist", false);
         }
 
         IActionResult IndexPage()
