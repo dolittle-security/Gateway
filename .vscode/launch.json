@@ -4,6 +4,29 @@
     // For more information, visit: https://go.microsoft.com/fwlink/?linkid=830387
     "version": "0.2.0",
     "configurations": [
+
+        {
+            "name": ".NET Core Launch (Setup)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-setup",
+            "program": "${workspaceFolder}/Source/Setup/bin/Debug/netcoreapp2.2/Setup.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Source/Setup",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
+        {
+            "name": ".NET Core Launch (Core)",
+            "type": "coreclr",
+            "request": "launch",
+            "preLaunchTask": "build-core",
+            "program": "${workspaceFolder}/Source/Core/bin/Debug/netcoreapp2.2/Core.dll",
+            "args": [],
+            "cwd": "${workspaceFolder}/Source/Core",
+            "stopAtEntry": false,
+            "console": "internalConsole"
+        },
         {
             "name": ".NET Core Attach",
             "type": "coreclr",
