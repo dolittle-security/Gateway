@@ -44,5 +44,11 @@ namespace Core.Pages
                 return _frontend.ChooseProvider(HttpContext);
             }
         }
+
+        [HttpGet("error")]
+        public IActionResult Error()
+        {
+            return _frontend.Error(HttpContext);
+        }
     }
 }
