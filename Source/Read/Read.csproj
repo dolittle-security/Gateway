@@ -1,11 +1,13 @@
 <Project Sdk="Microsoft.NET.Sdk">
-
   <PropertyGroup>
     <TargetFramework>netcoreapp2.2</TargetFramework>
   </PropertyGroup>
 
   <ItemGroup>
-      <ProjectReference Include="../Context/Context.csproj" />
+    <ProjectReference Include="../Context/Context.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Dolittle.ReadModels.MongoDB" Version="4.*" />
+  </ItemGroup>
 </Project>

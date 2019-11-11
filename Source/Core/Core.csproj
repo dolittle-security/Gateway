@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="../Read/Read.csproj" />
+        <ProjectReference Include="../Providers/Providers.csproj" />
     </ItemGroup>
 
     <ItemGroup>
@@ -26,6 +27,9 @@
         <PackageReference Include="Dolittle.AspNetCore" Version="4.*" />
         <PackageReference Include="Dolittle.SDK" Version="4.*" />
         <PackageReference Include="Dolittle.DependencyInversion.Autofac" Version="4.*" />
+
+        <PackageReference Include="Dolittle.Runtime.Events.MongoDB" Version="4.*" />
+        <PackageReference Include="Dolittle.ReadModels.MongoDB" Version="4.*" />
 
         <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
