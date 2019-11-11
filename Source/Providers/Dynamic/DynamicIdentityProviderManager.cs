@@ -8,16 +8,17 @@ using System.Threading.Tasks;
 using Dolittle.DependencyInversion;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Options;
+using Providers.Claims;
 
-namespace Core.Providers
+namespace Providers.Dynamic
 {
-    public class DynamicIdentityProviderManager : IDynamicIdenityProviderManager
+    public class IdentityProviderManager : IIdenityProviderManager
     {
         readonly IContainer _container;
         readonly IAuthenticationSchemeProvider _schemeProvider;
         readonly IPrincipalHomogenizer _homogenizer;
 
-        public DynamicIdentityProviderManager(IContainer container, IAuthenticationSchemeProvider schemeProvider, IPrincipalHomogenizer homogenizer)
+        public IdentityProviderManager(IContainer container, IAuthenticationSchemeProvider schemeProvider, IPrincipalHomogenizer homogenizer)
         {
             _container = container;
             _schemeProvider = schemeProvider;

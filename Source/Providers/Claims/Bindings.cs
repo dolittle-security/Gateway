@@ -4,18 +4,14 @@
  *--------------------------------------------------------------------------------------------*/
 
 using Dolittle.DependencyInversion;
-using Microsoft.AspNetCore.Authentication.OpenIdConnect;
-using Microsoft.Extensions.Options;
 
-namespace Core.Providers
+namespace Providers.Claims
 {
     public class Bindings : ICanProvideBindings
     {
         public void Provide(IBindingProviderBuilder builder)
         {
-            builder.Bind<IPostConfigureOptions<OpenIdConnectOptions>>().To<OpenIdConnectPostConfigureOptions>().Singleton();
-
-            builder.Bind<IDynamicIdenityProviderManager>().To<DynamicIdentityProviderManager>();
+            builder.Bind<IPrincipalHomogenizer>().To<PrincipalHomogenizer>();
         }
     }
 }

@@ -6,9 +6,9 @@
 using System;
 using Microsoft.AspNetCore.Authentication;
 
-namespace Core.Providers
+namespace Providers.Dynamic
 {
-    public interface IDynamicIdenityProviderManager
+    public interface IIdenityProviderManager
     {
         void AddIdentityProvider<THandler,TOptions>(Guid id, TOptions options)
             where THandler : RemoteAuthenticationHandler<TOptions>

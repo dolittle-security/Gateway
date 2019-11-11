@@ -5,7 +5,7 @@
 
 using System.Security.Claims;
 
-namespace Core.Providers
+namespace Providers.Claims
 {
     public interface IPrincipalHomogenizer
     {

@@ -8,7 +8,7 @@ using System.Linq;
 using System.Security.Claims;
 using Dolittle.Collections;
 
-namespace Core.Providers
+namespace Providers.Claims
 {
     public class PrincipalHomogenizer : IPrincipalHomogenizer
     {
