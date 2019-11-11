@@ -12,7 +12,7 @@
             $(document).ready(() => {
                 $.ajax("http://localhost:5000/api/Dolittle/Sentry/Gateway/Providers").done((content) => {
                     content.forEach(provider => {
-                        $('div#provider-list').append(`<p><a href="http://localhost:5000/Dolittle/Sentry/Gateway/SignIn?rd=${$.urlParam("rd")}&ip${provider.id}">${provider.name}</a></p>`);
+                        $('div#provider-list').append(`<p><a href="http://localhost:5000/Dolittle/Sentry/Gateway/SignIn?rd=${$.urlParam("rd")}&ip=${provider.id}">${provider.name}</a></p>`);
                         console.log(provider);
                     });
                 });
