@@ -6,7 +6,7 @@
 using System;
 using Dolittle.Concepts;
 
-namespace Concepts
+namespace Concepts.Portals
 {
     public class PortalId : ConceptAs<Guid>
     {
