@@ -3,28 +3,34 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using System;
 using System.Collections.Generic;
+using System.Linq;
 using Context;
+using MongoDB.Driver;
 
 namespace Read.Providers.Choosing
 {
     public class ProvidersForChoosingResolver : ICanResolveProvidersForChoosing
     {
         readonly IPortalContextManager _manager;
+        readonly IMongoCollection<Portal> _portals;
 
-        public ProvidersForChoosingResolver(IPortalContextManager manager)
+        public ProvidersForChoosingResolver(IPortalContextManager manager, IMongoCollection<Portal> portals)
         {
             _manager = manager;
-
+            _portals = portals;
         }
 
         public IEnumerable<IdentityProviderForChoosing> AllAvailableIdentityProvidersForChoosing()
         {
-            return new [] {
-                new IdentityProviderForChoosing { Id = Guid.NewGuid(), Name = "Azure Ad", },
-                new IdentityProviderForChoosing { Id = Guid.NewGuid(), Name = "GitHub", },
-            };
+            if (_portals.TryFindById(_manager.Current.Portal, out var portal))
+            {
+                return portal.Providers;
+            }
+            else
+            {
+                return Enumerable.Empty<IdentityProviderForChoosing>();
+            }
         }
     }
 }

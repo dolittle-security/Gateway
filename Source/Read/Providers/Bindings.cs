@@ -5,6 +5,7 @@
 
 using Dolittle.DependencyInversion;
 using Read.Providers.Choosing;
+using Read.Providers.Configuring;
 
 namespace Read.Providers
 {
@@ -13,6 +14,7 @@ namespace Read.Providers
         public void Provide(IBindingProviderBuilder builder)
         {
             builder.Bind<ICanResolveProvidersForChoosing>().To<ProvidersForChoosingResolver>();
+            builder.Bind<ICanProvideIdentityProviderConfigurations>().To<IdentityProviderConfigurations>();
         }
     }
 }
