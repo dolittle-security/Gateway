@@ -16,13 +16,13 @@ namespace Providers.Dynamic
     {
         readonly IContainer _container;
         readonly IAuthenticationSchemeProvider _schemeProvider;
-        readonly IPrincipalHomogenizer _homogenizer;
+        readonly IClaimNormalizer _normalizer;
 
-        public IdentityProviderManager(IContainer container, IAuthenticationSchemeProvider schemeProvider, IPrincipalHomogenizer homogenizer)
+        public IdentityProviderManager(IContainer container, IAuthenticationSchemeProvider schemeProvider, IClaimNormalizer normalizer)
         {
             _container = container;
             _schemeProvider = schemeProvider;
-            _homogenizer = homogenizer;
+            _normalizer = normalizer;
         }
 
         public void AddIdentityProvider<THandler, TOptions>(Guid id, TOptions options)
@@ -30,16 +30,16 @@ namespace Providers.Dynamic
             where TOptions : RemoteAuthenticationOptions, new()
         {
             _schemeProvider.AddScheme(new AuthenticationScheme(id.ToString(), id.ToString(), typeof(THandler)));
-            options.Events.OnTicketReceived = OnTicketReceived;
+            options.Events.OnTicketReceived = TicketRecieved;
             var postConfigure = _container.Get<IPostConfigureOptions<TOptions>>();
             postConfigure.PostConfigure(id.ToString(), options);
             var cache = _container.Get<IOptionsMonitorCache<TOptions>>();
             cache.TryAdd(id.ToString(), options);
         }
 
-        Task OnTicketReceived(TicketReceivedContext context)
+        Task TicketRecieved(TicketReceivedContext context)
         {
-            context.Principal = _homogenizer.Homogenize(context.Scheme.Name, context.Principal);
+            context.Principal = _normalizer.Normalize(Guid.Parse(context.Scheme.Name), context.Principal);
             return Task.CompletedTask;
         }
 

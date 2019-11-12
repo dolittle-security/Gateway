@@ -5,7 +5,9 @@
 
 using System.Threading.Tasks;
 using Dolittle.Collections;
+using Microsoft.AspNetCore.Authentication.OAuth.Claims;
 using Microsoft.AspNetCore.Authentication.OpenIdConnect;
+using Providers.Claims;
 using Read.Providers.Configuring;
 
 namespace Providers.Dynamic
@@ -38,10 +40,7 @@ namespace Providers.Dynamic
                 CallbackPath = $"/signin/oidc-{configuration.Id}",
                 SignedOutCallbackPath = $"/signout/oidc-{configuration.Id}",
             };
-            options.Events.OnAuthorizationCodeReceived = context => {
-
-                return Task.CompletedTask;
-            };
+            options.ClaimActions.Clear();
             _manager.AddIdentityProvider<OpenIdConnectHandler, OpenIdConnectOptions>(configuration.Id, options);
         }
     }
