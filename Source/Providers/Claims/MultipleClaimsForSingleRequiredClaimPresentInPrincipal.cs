@@ -3,12 +3,12 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using System.Security.Claims;
+using System;
 
 namespace Providers.Claims
 {
-    public interface IPrincipalHomogenizer
+    public class MultipleClaimsForSingleRequiredClaimPresentInPrincipal : Exception
     {
-        ClaimsPrincipal Homogenize(string scheme, ClaimsPrincipal original);
+        public MultipleClaimsForSingleRequiredClaimPresentInPrincipal(string claimType) : base($"Muliple claim values of claim type '{claimType}' was present the provided principal, but a single value was expected.") {}
     }
 }
