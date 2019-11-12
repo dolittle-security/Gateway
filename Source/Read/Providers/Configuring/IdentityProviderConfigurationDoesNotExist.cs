@@ -4,15 +4,12 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
-using System.Collections.Generic;
 using Concepts.Providers;
 
 namespace Read.Providers.Configuring
 {
-    public interface ICanProvideIdentityProviderConfigurations
+    public class IdentityProviderConfigurationDoesNotExist : Exception
     {
-        IdentityProviderConfiguration GetCommonProviderConfiguration(IdentityProviderId id);
-        IEnumerable<OpenIDConnectConfiguration> AllOpenIdConnectConfigurations();
-        event Action<OpenIDConnectConfiguration> OnOpenIdConnectConfiguraitonAdded;
+        public IdentityProviderConfigurationDoesNotExist(IdentityProviderId id) : base($"Configuration for identity provider with id {id} was not found.") {}
     }
 }

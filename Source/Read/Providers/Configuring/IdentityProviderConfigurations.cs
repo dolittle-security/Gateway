@@ -5,6 +5,8 @@
 
 using System;
 using System.Collections.Generic;
+using System.Runtime.Serialization;
+using Concepts.Providers;
 using Dolittle.Lifecycle;
 using MongoDB.Driver;
 
@@ -26,6 +28,18 @@ namespace Read.Providers.Configuring
         public IEnumerable<OpenIDConnectConfiguration> AllOpenIdConnectConfigurations()
         {
             return _openIdConfigurations.Find(_ => true).ToEnumerable();
+        }
+
+        public IdentityProviderConfiguration GetCommonProviderConfiguration(IdentityProviderId id)
+        {
+            if (_openIdConfigurations.TryFindById(id, out var configuration))
+            {
+                return configuration;
+            }
+            else
+            {
+                throw new IdentityProviderConfigurationDoesNotExist(id);
+            }
         }
     }
 }
