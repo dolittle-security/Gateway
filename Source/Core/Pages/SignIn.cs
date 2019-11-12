@@ -5,8 +5,8 @@
 
 using System;
 using System.Linq;
+using Core.Authentication;
 using Dolittle.Logging;
-using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
 using Read.Providers.Choosing;
 
@@ -17,12 +17,14 @@ namespace Core.Pages
     {
         readonly ICanResolveProvidersForChoosing _resolver;
         readonly IAuthenticationFrontend _frontend;
+        readonly ICanTriggerRemoteAuthentication _authenticator;
         readonly ILogger _logger;
 
-        public SignIn(ICanResolveProvidersForChoosing resolver, IAuthenticationFrontend frontend, ILogger logger)
+        public SignIn(ICanResolveProvidersForChoosing resolver, IAuthenticationFrontend frontend, ICanTriggerRemoteAuthentication authenticator, ILogger logger)
         {
             _resolver = resolver;
             _frontend = frontend;
+            _authenticator = authenticator;
             _logger = logger;
         }
 
@@ -36,9 +38,7 @@ namespace Core.Pages
                 return _frontend.NoProvidersAvailable(HttpContext);
 
                 case 1:
-                return Challenge(new AuthenticationProperties {
-                    RedirectUri = rd.ToString(),
-                }, providers.First().Id.ToString());
+                return _authenticator.Challenge(HttpContext, providers.First().Id, rd);
 
                 default:
                 return _frontend.ChooseProvider(HttpContext);
