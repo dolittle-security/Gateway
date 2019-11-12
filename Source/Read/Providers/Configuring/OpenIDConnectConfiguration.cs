@@ -3,13 +3,10 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Concepts.Providers;
-
 namespace Read.Providers.Configuring
 {
-    public class OpenIDConnectConfiguration
+    public class OpenIDConnectConfiguration : IdentityProviderConfiguration
     {
-        public IdentityProviderId Id { get; set; }
         public string Authority { get; set; }
         public string ClientId { get; set; }
         public string ClientSecret { get; set; }
