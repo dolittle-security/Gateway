@@ -24,7 +24,7 @@ namespace Providers.Claims
         public ClaimsPrincipal Normalize(IdentityProviderId providerId, ClaimsPrincipal original)
         {
             var configuration = _configurations.GetCommonProviderConfiguration(providerId);
-            var identity = new ClaimsIdentity("Dolittle.Sentry");
+            var identity = new ClaimsIdentity("Dolittle.Security"); // TODO: Again - circular dependency
 
             identity.AddClaim("iss", GetSingleRequiredClaimOrThrow(original, "iss"));
             identity.AddClaim("sub", GetSingleRequiredClaimOrThrow(original, "sub"));
