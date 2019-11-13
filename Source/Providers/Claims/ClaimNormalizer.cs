@@ -42,6 +42,11 @@ namespace Providers.Claims
                 identity.AddClaim(type, value);
             }
 
+            foreach (var claim in identity.Claims)
+            {
+                System.Console.WriteLine($"!!!!!!! Resulting Claims {claim.Type}: {claim.Value}");
+            }
+
             return new ClaimsPrincipal(identity);
         }
 

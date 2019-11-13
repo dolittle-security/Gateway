@@ -3,14 +3,15 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Concepts.Providers;
-using Dolittle.ReadModels;
+using System;
+using Dolittle.Tenancy;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Read.Providers.Choosing
+namespace Core.Authentication
 {
-    public class IdentityProviderForChoosing : IReadModel
+    public interface ICanSignUserInToTenant
     {
-        public IdentityProviderId Id { get; set; }
-        public IdentityProviderDisplayName Name { get; set; }
+        IActionResult SignUserInTo(HttpContext context, TenantId tenant, Uri redirectUri);
     }
 }

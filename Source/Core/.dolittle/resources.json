@@ -10,5 +10,29 @@
             "database": "dev_event_store",
             "useSSL": false
         }
+    },
+    "00fa79c4-9b95-43c1-8058-bb6e01e2ecab": {
+        "readModels": {
+            "host": "mongodb://localhost:27017",
+            "database": "one_read_models",
+            "useSSL": false
+        },
+        "eventStore": {
+            "host": "mongodb://localhost:27017",
+            "database": "one_event_store",
+            "useSSL": false
+        }
+    },
+    "7a888183-b147-4ce3-bd4d-118133f13e4b": {
+        "readModels": {
+            "host": "mongodb://localhost:27017",
+            "database": "two_read_models",
+            "useSSL": false
+        },
+        "eventStore": {
+            "host": "mongodb://localhost:27017",
+            "database": "two_event_store",
+            "useSSL": false
+        }
     }
 }

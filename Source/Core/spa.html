@@ -9,18 +9,56 @@
                 return (results !== null) ? results[1] || 0 : false;
             };
 
-            $(document).ready(() => {
+            const selectProvider = () => {
                 $.ajax("http://localhost:5000/api/Dolittle/Sentry/Gateway/Providers").done((content) => {
                     content.forEach(provider => {
                         $('div#provider-list').append(`<p><a href="http://localhost:5000/Dolittle/Sentry/Gateway/SignIn?rd=${$.urlParam("rd")}&ip=${provider.id}">${provider.name}</a></p>`);
                         console.log(provider);
                     });
                 });
+            };
+
+            const selectTenant = () => {
+                $('div#select-tenant').show();
+                $.ajax("http://localhost:5000/api/Dolittle/Sentry/Gateway/Tenants").done((content) => {
+                    content.forEach(tenant => {
+                        $('div#tenant-list').append(`<p><a href="http://localhost:5000/Dolittle/Sentry/Gateway/PickTenant?rd=${$.urlParam("rd")}&tenant=${tenant}">${tenant}</a></p>`);
+                        console.log(tenant);
+                    });
+                });
+            };
+
+            const error = () => {
+                $('div#error').show().append(`<p>${$.urlParam("id")}</p>`);
+            };
+
+            $(document).ready(() => {
+                switch (window.location.pathname)
+                {
+                    case '/signin':
+                        selectProvider();
+                        break;
+                    case '/signin/tenant':
+                        selectTenant();
+                        break;
+                    case '/signin/error':
+                        error();
+                        break;
+                }
             });
         </script>
     </head>
     <body>
-        <h1>Select provider:</h1>
-        <div id="provider-list"></div>
+        <div id="select-provider" style="display:none">
+            <h1>Select provider:</h1>
+            <div id="provider-list"></div>
+        </div>
+        <div id="select-tenant" style="display:none">
+            <h1>Select tenant:</h1>
+            <div id="tenant-list"></div>
+        </div>
+        <div id="error" style="display:none">
+            <h1>Error:</h1>
+        </div>
     </body>
 </html>

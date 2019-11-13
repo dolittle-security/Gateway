@@ -11,10 +11,12 @@ namespace Core.Pages
 {
     public interface IAuthenticationFrontend
     {
-        IActionResult NoProvidersAvailable(HttpContext context);
-
         IActionResult ChooseProvider(HttpContext context);
+        IActionResult ChooseTenant(HttpContext context);
 
+
+        IActionResult NoProvidersAvailable(HttpContext context);
+        IActionResult NoTenantsForUser(HttpContext context);
         IActionResult SpecifiedProviderDoesNotExist(HttpContext context, IdentityProviderId provider);
         IActionResult Error(HttpContext context);
     }

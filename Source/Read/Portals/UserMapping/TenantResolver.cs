@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using Concepts.Claims;
 using Context;
 using Dolittle.Logging;
@@ -44,6 +45,18 @@ namespace Read.Portals.UserMapping
                 default:
                 _logger.Warning($"Found multiple mappings for portal:'{portal}', issuer:'{issuer}', subject:'{subject}'. All tenants will be returned, but this indicates something wrong in the database, and should be fixed.");
                 return tenantMappings.SelectMany(_ => _.Tenants);
+            }
+        }
+
+        public IEnumerable<TenantId> GetTenantsFor(ClaimsPrincipal principal)
+        {
+            if (principal.TryGetIssuerSubjectClaims(out var issuer, out var subject))
+            {
+                return GetTenantsFor(issuer, subject);
+            }
+            else
+            {
+                return Enumerable.Empty<TenantId>();
             }
         }
     }

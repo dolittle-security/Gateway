@@ -1,4 +1,14 @@
 {
   "modules": {},
-  "features": {}
+  "features": {
+    "36fa4b1e-3118-47b9-9af5-ea88d2b49b0c": {
+      "name": "Providers",
+      "subFeatures": {
+        "4d9b9177-23c6-4c80-bf80-83c2113f778d": {
+          "name": "Choosing",
+          "subFeatures": {}
+        }
+      }
+    }
+  }
 }

@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System.Collections.Generic;
+using System.Security.Claims;
 using Concepts.Claims;
 using Dolittle.Tenancy;
 
@@ -12,5 +13,6 @@ namespace Read.Portals.UserMapping
     public interface ICanResolveTenantsForProviderSubjects
     {
         IEnumerable<TenantId> GetTenantsFor(IssuerClaim issuer, SubjectClaim subject);
+        IEnumerable<TenantId> GetTenantsFor(ClaimsPrincipal principal);
     }
 }

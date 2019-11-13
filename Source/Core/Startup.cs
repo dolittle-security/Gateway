@@ -44,13 +44,17 @@ namespace Core
                 .PersistKeysToFileSystem(new DirectoryInfo(".cookies"));
 
             
-            services.AddAuthentication(_ => {
+            var authentication = services.AddAuthentication(_ => {
                 _.DefaultScheme = CompositeAuthenticationOptions.CompositeSchemeName;
                 _.DefaultAuthenticateScheme = CompositeAuthenticationOptions.CompositeSchemeName;
                 _.DefaultForbidScheme = CompositeAuthenticationOptions.CompositeSchemeName;
                 _.DefaultSignInScheme = CompositeAuthenticationOptions.CookieSchemeName;
                 _.DefaultSignOutScheme = CompositeAuthenticationOptions.CookieSchemeName;
-            }).AddCookie(CompositeAuthenticationOptions.CookieSchemeName).AddIdentityToken(CompositeAuthenticationOptions.IdentityTokenSchemeName).AddComposite(CompositeAuthenticationOptions.CompositeSchemeName);
+            });
+            authentication.AddCookie(CompositeAuthenticationOptions.CookieSchemeName);
+            authentication.AddIdentityToken(CompositeAuthenticationOptions.IdentityTokenSchemeName);
+            authentication.AddComposite(CompositeAuthenticationOptions.CompositeSchemeName);
+            authentication.AddCookie("Dolittle.External");
             
 
             services.AddIdentityServer(_ => {

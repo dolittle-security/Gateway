@@ -27,6 +27,12 @@ namespace Core.Pages
             return IndexPage();
         }
 
+        public IActionResult ChooseTenant(HttpContext context)
+        {
+            _logger.Information($"Serving the ChooseTenant page");
+            return IndexPage();
+        }
+
         public IActionResult Error(HttpContext context)
         {
             _logger.Information($"Serving the Error page");
@@ -37,6 +43,12 @@ namespace Core.Pages
         {
             _logger.Information($"Serving the NoProvidersAvailable page");
             return new RedirectResult("/signin/error?id=no-provider-available", false);
+        }
+
+        public IActionResult NoTenantsForUser(HttpContext context)
+        {
+            _logger.Information($"Serving the NoTenantsForUser page");
+            return new RedirectResult("/signin/error?id=no-tenants-for-user", false);
         }
 
         public IActionResult SpecifiedProviderDoesNotExist(HttpContext context, IdentityProviderId provider)

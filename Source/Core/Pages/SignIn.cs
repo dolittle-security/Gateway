@@ -5,9 +5,12 @@
 
 using System;
 using System.Linq;
+using System.Threading.Tasks;
 using Core.Authentication;
 using Dolittle.Logging;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Read.Portals.UserMapping;
 using Read.Providers.Choosing;
 
 namespace Core.Pages
@@ -16,15 +19,19 @@ namespace Core.Pages
     public class SignIn : ControllerBase
     {
         readonly ICanResolveProvidersForChoosing _resolver;
+        readonly ICanResolveTenantsForProviderSubjects _mapper;
         readonly IAuthenticationFrontend _frontend;
-        readonly ICanTriggerRemoteAuthentication _authenticator;
+        readonly ICanTriggerRemoteAuthentication _remoteAuthenticator;
+        readonly ICanSignUserInToTenant _tenantAuthenticator;
         readonly ILogger _logger;
 
-        public SignIn(ICanResolveProvidersForChoosing resolver, IAuthenticationFrontend frontend, ICanTriggerRemoteAuthentication authenticator, ILogger logger)
+        public SignIn(ICanResolveProvidersForChoosing resolver, ICanResolveTenantsForProviderSubjects mapper, IAuthenticationFrontend frontend, ICanTriggerRemoteAuthentication remoteAuthenticator, ICanSignUserInToTenant tenantAuthenticator, ILogger logger)
         {
             _resolver = resolver;
+            _mapper = mapper;
             _frontend = frontend;
-            _authenticator = authenticator;
+            _remoteAuthenticator = remoteAuthenticator;
+            _tenantAuthenticator = tenantAuthenticator;
             _logger = logger;
         }
 
@@ -38,17 +45,39 @@ namespace Core.Pages
                 return _frontend.NoProvidersAvailable(HttpContext);
 
                 case 1:
-                return _authenticator.Challenge(HttpContext, providers.First().Id, rd);
+                return _remoteAuthenticator.Challenge(HttpContext, providers.First().Id, rd);
 
                 default:
                 return _frontend.ChooseProvider(HttpContext);
             }
         }
 
-        [HttpGet("error")]
+        [HttpGet("Error")]
         public IActionResult Error()
         {
             return _frontend.Error(HttpContext);
+        }
+
+        [HttpGet("Tenant")]
+        public async Task<IActionResult> SelectTenant(Uri rd)
+        {
+            var authResult = await HttpContext.AuthenticateAsync("Dolittle.External");
+            if (authResult.Succeeded)
+            {
+                var userTenants = _mapper.GetTenantsFor(authResult.Principal);
+                switch (userTenants.Count())
+                {
+                    case 0:
+                    return _frontend.NoTenantsForUser(HttpContext);
+
+                    case 1:
+                    return _tenantAuthenticator.SignUserInTo(HttpContext, userTenants.First(), rd);
+
+                    default:
+                    return _frontend.ChooseTenant(HttpContext);
+                }
+            }
+            return Signin(rd);
         }
     }
 }

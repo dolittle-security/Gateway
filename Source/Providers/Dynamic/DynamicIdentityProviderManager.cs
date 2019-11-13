@@ -30,11 +30,17 @@ namespace Providers.Dynamic
             where TOptions : RemoteAuthenticationOptions, new()
         {
             _schemeProvider.AddScheme(new AuthenticationScheme(id.ToString(), id.ToString(), typeof(THandler)));
-            options.Events.OnTicketReceived = TicketRecieved;
+            SetCommonProviderOptions(options);
             var postConfigure = _container.Get<IPostConfigureOptions<TOptions>>();
             postConfigure.PostConfigure(id.ToString(), options);
             var cache = _container.Get<IOptionsMonitorCache<TOptions>>();
             cache.TryAdd(id.ToString(), options);
+        }
+
+        void SetCommonProviderOptions(RemoteAuthenticationOptions options)
+        {
+            options.SignInScheme = "Dolittle.External";
+            options.Events.OnTicketReceived = TicketRecieved;
         }
 
         Task TicketRecieved(TicketReceivedContext context)

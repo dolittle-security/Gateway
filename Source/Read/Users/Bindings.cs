@@ -3,14 +3,15 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Concepts.Providers;
-using Dolittle.ReadModels;
+using Dolittle.DependencyInversion;
 
-namespace Read.Providers.Choosing
+namespace Read.Users
 {
-    public class IdentityProviderForChoosing : IReadModel
+    public class Bindings : ICanProvideBindings
     {
-        public IdentityProviderId Id { get; set; }
-        public IdentityProviderDisplayName Name { get; set; }
+        public void Provide(IBindingProviderBuilder builder)
+        {
+            builder.Bind<ICanResolveUserForProviderSubjects>().To<UserResolver>();
+        }
     }
 }

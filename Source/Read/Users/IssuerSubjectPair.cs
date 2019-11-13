@@ -3,14 +3,13 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Concepts.Providers;
-using Dolittle.ReadModels;
+using Concepts.Claims;
 
-namespace Read.Providers.Choosing
+namespace Read.Users
 {
-    public class IdentityProviderForChoosing : IReadModel
+    public class IssuerSubjectPair
     {
-        public IdentityProviderId Id { get; set; }
-        public IdentityProviderDisplayName Name { get; set; }
+        public IssuerClaim Issuer { get; set; }
+        public SubjectClaim Subject { get; set; }
     }
 }

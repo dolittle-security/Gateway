@@ -12,6 +12,8 @@ namespace Core.Authentication
         public void Provide(IBindingProviderBuilder builder)
         {
             builder.Bind<ICanTriggerRemoteAuthentication>().To<RemoteAuthenticator>();
+            builder.Bind<ICanSignUserInToTenant>().To<LocalAuthenticator>();
+            builder.Bind<ICanGenerateTenantPrincipal>().To<TenantPrincipalGenerator>();
         }
     }
 }

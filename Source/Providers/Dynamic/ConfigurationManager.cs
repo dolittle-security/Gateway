@@ -32,7 +32,6 @@ namespace Providers.Dynamic
         void AddOpenIdConnectProvider(OpenIDConnectConfiguration configuration)
         {
             var options = new OpenIdConnectOptions {
-                SignInScheme = "Dolittle.Cookie",
                 ResponseType = "code",
                 Authority = configuration.Authority,
                 ClientId = configuration.ClientId,

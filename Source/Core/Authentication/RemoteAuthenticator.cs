@@ -5,6 +5,7 @@
 
 using System;
 using System.Linq;
+using System.Web;
 using Concepts.Providers;
 using Core.Pages;
 using Microsoft.AspNetCore.Authentication;
@@ -29,9 +30,11 @@ namespace Core.Authentication
         {
             if (_providers.AllAvailableIdentityProvidersForChoosing().Any(_ => _.Id == providerId))
             {
+                var url = HttpUtility.UrlEncode(redirectUri.ToString());
+
                 // TODO: Set some state properties here?
                 return new ChallengeResult(providerId.ToString(), new AuthenticationProperties {
-                    RedirectUri = redirectUri.ToString(),
+                    RedirectUri = $"/signin/tenant?rd={url}",
                 });
             }
             else

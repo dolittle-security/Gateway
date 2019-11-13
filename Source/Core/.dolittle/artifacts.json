@@ -1,1 +1,19 @@
-{}
+{
+  "4d9b9177-23c6-4c80-bf80-83c2113f778d": {
+    "commands": {},
+    "events": {},
+    "eventSources": {},
+    "readModels": {
+      "db42b28a-516e-47b9-8c08-3aa565c830b1": {
+        "generation": 1,
+        "type": "Read.Providers.Choosing.IdentityProviderForChoosing, Read"
+      }
+    },
+    "queries": {
+      "ba6b9f36-2265-4680-9d9d-92817254d6c7": {
+        "generation": 1,
+        "type": "Read.Providers.Choosing.ProvidersForPortal, Read"
+      }
+    }
+  }
+}
