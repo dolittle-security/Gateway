@@ -3,12 +3,14 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Dolittle.Concepts;
+using System.Collections.Generic;
+using Concepts.Claims;
+using Dolittle.Tenancy;
 
-namespace Concepts.Claims
+namespace Read.Portals.UserMapping
 {
-    public class ClaimValue : ConceptAs<string>
+    public interface ICanResolveTenantsForProviderSubjects
     {
-        public static implicit operator ClaimValue(string value) => new ClaimValue { Value = value };
+        IEnumerable<TenantId> GetTenantsFor(IssuerClaim issuer, SubjectClaim subject);
     }
 }

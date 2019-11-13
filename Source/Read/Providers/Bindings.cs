@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 using Dolittle.DependencyInversion;
+using Read.Portals.UserMapping;
 using Read.Providers.Choosing;
 using Read.Providers.Configuring;
 
@@ -15,6 +16,7 @@ namespace Read.Providers
         {
             builder.Bind<ICanResolveProvidersForChoosing>().To<ProvidersForChoosingResolver>();
             builder.Bind<ICanProvideIdentityProviderConfigurations>().To<IdentityProviderConfigurations>();
+            builder.Bind<ICanResolveTenantsForProviderSubjects>().To<TenantResolver>();
         }
     }
 }

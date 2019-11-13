@@ -7,8 +7,8 @@ using Dolittle.Concepts;
 
 namespace Concepts.Claims
 {
-    public class ClaimValue : ConceptAs<string>
+    public class SubjectClaim : ConceptAs<string>
     {
-        public static implicit operator ClaimValue(string value) => new ClaimValue { Value = value };
+        public static implicit operator SubjectClaim(string sub) => new SubjectClaim { Value = sub };
     }
 }
