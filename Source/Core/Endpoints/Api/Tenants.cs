@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Authentication;
 using Concepts.Claims;
 using Dolittle.Tenancy;
 using Microsoft.AspNetCore.Authentication;
@@ -26,7 +27,7 @@ namespace Core.Endpoints.Api
         [HttpGet]
         public async Task<ActionResult<IEnumerable<TenantId>>> AllTenants()
         {
-            var authResult = await HttpContext.AuthenticateAsync("Dolittle.External");
+            var authResult = await HttpContext.AuthenticateAsync(Constants.ExternalCookieSchemeName);
             if (authResult.Succeeded)
             {
                 if (authResult.Principal.TryGetIssuerSubjectClaims(out var issuer, out var subject))

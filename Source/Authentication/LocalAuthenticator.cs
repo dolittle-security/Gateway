@@ -4,20 +4,17 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
-using System.Collections.Generic;
 using System.Security.Claims;
-using Concepts.Claims;
 using Dolittle.DependencyInversion;
 using Dolittle.Execution;
 using Dolittle.Tenancy;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Providers.Claims;
 using Read.Portals.UserMapping;
 using Read.Users;
 
-namespace Core.Authentication
+namespace Authentication
 {
     public class LocalAuthenticator : ICanSignUserInToTenant
     {
@@ -36,7 +33,7 @@ namespace Core.Authentication
 
         public IActionResult SignUserInTo(HttpContext context, TenantId tenant, Uri redirectUri)
         {
-            var authResult = context.AuthenticateAsync("Dolittle.External").Result;
+            var authResult = context.AuthenticateAsync(Constants.ExternalCookieSchemeName).Result;
             if (authResult.Succeeded)
             {
                 var userTenants = _mapper.GetTenantsFor(authResult.Principal);
@@ -57,7 +54,7 @@ namespace Core.Authentication
             if (userMapper.TryGetUserFor(portalPrincipal, out var user))
             {
                 var tenantPrincipal = _generator.GenerateFor(user);
-                context.SignInAsync("Dolittle.Cookie", tenantPrincipal);
+                context.SignInAsync(Constants.InternalCookieSchemeName, tenantPrincipal);
                 return new RedirectResult(redirectUri.ToString(), false);
             }
             return new UnauthorizedResult();

@@ -5,7 +5,7 @@
 
 using Dolittle.DependencyInversion;
 
-namespace Core.Authentication
+namespace Authentication
 {
     public class Bindings : ICanProvideBindings
     {

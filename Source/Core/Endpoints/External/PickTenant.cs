@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
-using Core.Authentication;
+using Authentication;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Endpoints.External

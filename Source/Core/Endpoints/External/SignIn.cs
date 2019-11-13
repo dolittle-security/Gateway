@@ -4,8 +4,8 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
-using Core.Authentication;
-using Core.Pages;
+using Authentication;
+using Authentication.Frontend;
 using Microsoft.AspNetCore.Mvc;
 
 namespace Core.Endpoints.External

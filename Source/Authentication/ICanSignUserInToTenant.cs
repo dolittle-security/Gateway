@@ -8,7 +8,7 @@ using Dolittle.Tenancy;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Authentication
+namespace Authentication
 {
     public interface ICanSignUserInToTenant
     {

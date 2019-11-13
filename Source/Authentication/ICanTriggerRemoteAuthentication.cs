@@ -3,13 +3,15 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using System.Security.Claims;
-using Read.Users;
+using System;
+using Concepts.Providers;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Authentication
+namespace Authentication
 {
-    public interface ICanGenerateTenantPrincipal
+    public interface ICanTriggerRemoteAuthentication
     {
-        ClaimsPrincipal GenerateFor(User user);
+        IActionResult Challenge(HttpContext context, IdentityProviderId providerId, Uri redirectUri);
     }
 }

@@ -6,7 +6,7 @@
 using System;
 using Microsoft.AspNetCore.Authentication;
 
-namespace Core.Authentication
+namespace Authentication.Handlers
 {
     public static class CompositeAuthenticationHandlerExtensions
     {

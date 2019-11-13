@@ -39,7 +39,7 @@ namespace Providers.Dynamic
 
         void SetCommonProviderOptions(RemoteAuthenticationOptions options)
         {
-            options.SignInScheme = "Dolittle.External";
+            options.SignInScheme = "Dolittle.External"; // TODO: How do we get this aligned with the rest - some circular dependency here
             options.Events.OnTicketReceived = TicketRecieved;
         }
 

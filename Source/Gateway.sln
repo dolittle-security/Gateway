@@ -15,6 +15,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Setup", "Setup\Setup.csproj
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers", "Providers\Providers.csproj", "{3B5BDB6C-ECB7-4685-A746-F9AF94F6C8E9}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{54ABCFC7-4D04-4DB3-846B-F8D44769F787}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -100,5 +102,17 @@ Global
 		{3B5BDB6C-ECB7-4685-A746-F9AF94F6C8E9}.Release|x64.Build.0 = Release|Any CPU
 		{3B5BDB6C-ECB7-4685-A746-F9AF94F6C8E9}.Release|x86.ActiveCfg = Release|Any CPU
 		{3B5BDB6C-ECB7-4685-A746-F9AF94F6C8E9}.Release|x86.Build.0 = Release|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Debug|x64.Build.0 = Debug|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Debug|x86.Build.0 = Debug|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|Any CPU.Build.0 = Release|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x64.ActiveCfg = Release|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x64.Build.0 = Release|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x86.ActiveCfg = Release|Any CPU
+		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal

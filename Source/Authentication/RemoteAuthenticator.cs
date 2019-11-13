@@ -6,14 +6,14 @@
 using System;
 using System.Linq;
 using System.Web;
+using Authentication.Frontend;
 using Concepts.Providers;
-using Core.Pages;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Read.Providers.Choosing;
 
-namespace Core.Authentication
+namespace Authentication
 {
     public class RemoteAuthenticator : ICanTriggerRemoteAuthentication
     {

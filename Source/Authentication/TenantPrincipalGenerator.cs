@@ -9,7 +9,7 @@ using Dolittle.Execution;
 using Providers.Claims;
 using Read.Users;
 
-namespace Core.Authentication
+namespace Authentication
 {
     public class TenantPrincipalGenerator : ICanGenerateTenantPrincipal
     {
@@ -24,7 +24,7 @@ namespace Core.Authentication
 
         public ClaimsPrincipal GenerateFor(User user)
         {
-            var identity = new ClaimsIdentity("Dolittle.Sentry");
+            var identity = new ClaimsIdentity(Constants.IdentityAuthenticationType);
 
             var issuer = _portalManager.Current.BaseDomain;
             if (!string.IsNullOrWhiteSpace(_portalManager.Current.SubDomain))

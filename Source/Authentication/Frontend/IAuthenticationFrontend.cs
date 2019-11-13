@@ -7,7 +7,7 @@ using Concepts.Providers;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Pages
+namespace Authentication.Frontend
 {
     public interface IAuthenticationFrontend
     {

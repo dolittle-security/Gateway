@@ -5,7 +5,7 @@
 
 using System.Threading.Tasks;
 using System.Web;
-using Core.Authentication;
+using Authentication;
 using Dolittle.Collections;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -18,7 +18,7 @@ namespace Core.Endpoints.Internal
         [HttpGet]
         public async Task<IActionResult> Authenticate()
         {
-            var result = await HttpContext.AuthenticateAsync(CompositeAuthenticationOptions.CompositeSchemeName);
+            var result = await HttpContext.AuthenticateAsync(Constants.CompositeSchemeName);
             if (result.Succeeded)
             {
                 var claims = "Claims:\n";

@@ -1,0 +1,20 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.2</TargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="../Concepts/Concepts.csproj" />
+    <ProjectReference Include="../Context/Context.csproj" />
+    <ProjectReference Include="../Read/Read.csproj" />
+    <ProjectReference Include="../Providers/Providers.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Dolittle.DependencyInversion.Autofac" Version="4.*" />
+
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
+    <PackageReference Include="IdentityServer4" Version="2.5.3" />
+    <PackageReference Include="IdentityServer4.AccessTokenValidation" Version="2.7.0" />
+  </ItemGroup>
+</Project>

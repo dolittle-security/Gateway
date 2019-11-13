@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace Core.Authentication
+namespace Authentication.Handlers
 {
     public class IdentityTokenAuthenticationHandler : AuthenticationHandler<IdentityTokenAuthenticationOptions>
     {
@@ -50,7 +50,7 @@ namespace Core.Authentication
             }
 
             return AuthenticateResult.Success(new AuthenticationTicket(
-                new ClaimsPrincipal(new ClaimsIdentity(validationResult.Claims, "Dolittle.Bearer")),
+                new ClaimsPrincipal(new ClaimsIdentity(validationResult.Claims, Scheme.Name)),
                 new AuthenticationProperties(),
                 Scheme.Name
             ));

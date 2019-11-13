@@ -6,7 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using Autofac;
 using Context;
-using Core.Authentication;
 using Core.Services;
 using Dolittle.Booting;
 using Dolittle.DependencyInversion.Autofac;
@@ -17,6 +16,8 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Dolittle.Concepts.Serialization.Json;
+using Authentication;
+using Authentication.Handlers;
 
 namespace Core
 {
@@ -45,23 +46,23 @@ namespace Core
 
             
             var authentication = services.AddAuthentication(_ => {
-                _.DefaultScheme = CompositeAuthenticationOptions.CompositeSchemeName;
-                _.DefaultAuthenticateScheme = CompositeAuthenticationOptions.CompositeSchemeName;
-                _.DefaultForbidScheme = CompositeAuthenticationOptions.CompositeSchemeName;
-                _.DefaultSignInScheme = CompositeAuthenticationOptions.CookieSchemeName;
-                _.DefaultSignOutScheme = CompositeAuthenticationOptions.CookieSchemeName;
+                _.DefaultScheme = Constants.CompositeSchemeName;
+                _.DefaultAuthenticateScheme = Constants.CompositeSchemeName;
+                _.DefaultForbidScheme = Constants.CompositeSchemeName;
+                _.DefaultSignInScheme = Constants.InternalCookieSchemeName;
+                _.DefaultSignOutScheme = Constants.InternalCookieSchemeName;
             });
-            authentication.AddCookie(CompositeAuthenticationOptions.CookieSchemeName);
-            authentication.AddIdentityToken(CompositeAuthenticationOptions.IdentityTokenSchemeName);
-            authentication.AddComposite(CompositeAuthenticationOptions.CompositeSchemeName);
-            authentication.AddCookie("Dolittle.External");
+            authentication.AddCookie(Constants.InternalCookieSchemeName);
+            authentication.AddCookie(Constants.ExternalCookieSchemeName);
+            authentication.AddIdentityToken(Constants.IdentityTokenSchemeName);
+            authentication.AddComposite(Constants.CompositeSchemeName);
             
 
             services.AddIdentityServer(_ => {
                 _.UserInteraction.ErrorUrl = "/error";
                 _.UserInteraction.LoginUrl = "/signin";
                 _.UserInteraction.LoginReturnUrlParameter = "rd";
-                //_.Authentication.CookieAuthenticationScheme = "Dolittle.Sentry";
+                _.Authentication.CookieAuthenticationScheme = Constants.InternalCookieSchemeName;
             }).AddResourceStore<ResourceStore>().AddClientStore<ClientStore>();
 
             services.AddSingleton<IKeyMaterialService, KeyMaterialService>();

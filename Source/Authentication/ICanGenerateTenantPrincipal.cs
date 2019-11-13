@@ -3,12 +3,13 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using System;
+using System.Security.Claims;
+using Read.Users;
 
-namespace Core.Authentication
+namespace Authentication
 {
-    public class MultipleAuthenticatedIdentitiesWithConflictingClaims : Exception
+    public interface ICanGenerateTenantPrincipal
     {
-        public MultipleAuthenticatedIdentitiesWithConflictingClaims() : base("Multiple authenticated identites with conflicting claims was present on the request.") {}
+        ClaimsPrincipal GenerateFor(User user);
     }
 }

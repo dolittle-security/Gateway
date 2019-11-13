@@ -6,7 +6,8 @@
 using System;
 using System.Linq;
 using System.Threading.Tasks;
-using Core.Authentication;
+using Authentication;
+using Authentication.Frontend;
 using Dolittle.Logging;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
@@ -61,7 +62,7 @@ namespace Core.Pages
         [HttpGet("Tenant")]
         public async Task<IActionResult> SelectTenant(Uri rd)
         {
-            var authResult = await HttpContext.AuthenticateAsync("Dolittle.External");
+            var authResult = await HttpContext.AuthenticateAsync(Constants.ExternalCookieSchemeName);
             if (authResult.Succeeded)
             {
                 var userTenants = _mapper.GetTenantsFor(authResult.Principal);

@@ -4,14 +4,11 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
-using Concepts.Providers;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
 
-namespace Core.Authentication
+namespace Authentication.Handlers
 {
-    public interface ICanTriggerRemoteAuthentication
+    public class MultipleAuthenticatedIdentitiesWithConflictingClaims : Exception
     {
-        IActionResult Challenge(HttpContext context, IdentityProviderId providerId, Uri redirectUri);
+        public MultipleAuthenticatedIdentitiesWithConflictingClaims() : base("Multiple authenticated identites with conflicting claims was present on the request.") {}
     }
 }
