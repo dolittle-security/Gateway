@@ -5,6 +5,7 @@
 
 using System.Collections.Generic;
 using System.Linq;
+using Concepts.Providers;
 using Context;
 using MongoDB.Driver;
 
@@ -31,6 +32,13 @@ namespace Read.Providers.Choosing
             {
                 return Enumerable.Empty<IdentityProviderForChoosing>();
             }
+        }
+
+        public bool TryGetProvider(IdentityProviderId id, out IdentityProviderForChoosing provider)
+        {
+            var providers = AllAvailableIdentityProvidersForChoosing().Where(_ => _.Id == id);
+            provider = providers.FirstOrDefault();
+            return providers.Any();
         }
     }
 }

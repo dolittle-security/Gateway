@@ -4,11 +4,13 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System.Collections.Generic;
+using Concepts.Providers;
 
 namespace Read.Providers.Choosing
 {
     public interface ICanResolveProvidersForChoosing
     {
         IEnumerable<IdentityProviderForChoosing> AllAvailableIdentityProvidersForChoosing();
+        bool TryGetProvider(IdentityProviderId id, out IdentityProviderForChoosing provider);
     }
 }

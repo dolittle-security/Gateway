@@ -28,6 +28,17 @@
                 });
             };
 
+            const signedout = () => {
+                $('div#signedout').show();
+            };
+
+            const signoutExternal = () => {
+                $('div#signout-external').show();
+                $.ajax(`http://localhost:5000/api/Dolittle/Sentry/Gateway/Providers/${$.urlParam("idp")}`).done((content) => {
+                    $('div#signout-external').append(`<p>Do you also want to log out of <a href="http://localhost:5000/Dolittle/Sentry/Gateway/SignOut/External?idp=${$.urlParam("idp")}">${content.name}</a>?</p>`);
+                });
+            };
+
             const error = () => {
                 $('div#error').show().append(`<p>${$.urlParam("id")}</p>`);
             };
@@ -44,6 +55,12 @@
                     case '/signin/error':
                         error();
                         break;
+                    case '/signout':
+                        signedout();
+                        break;
+                    case '/signout/external':
+                        signoutExternal();
+                        break;
                 }
             });
         </script>
@@ -56,6 +73,12 @@
         <div id="select-tenant" style="display:none">
             <h1>Select tenant:</h1>
             <div id="tenant-list"></div>
+        </div>
+        <div id="signedout" style="display:none">
+            <h1>Signed out</h1>
+        </div>
+        <div id="signout-external" style="display:none">
+            <h1>Signed out</h1>
         </div>
         <div id="error" style="display:none">
             <h1>Error:</h1>

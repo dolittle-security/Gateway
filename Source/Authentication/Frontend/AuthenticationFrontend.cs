@@ -51,6 +51,24 @@ namespace Authentication.Frontend
             return new RedirectResult("/signin/error?id=no-tenants-for-user", false);
         }
 
+        public IActionResult SignedOut(HttpContext context)
+        {
+            _logger.Information($"Serving the SignedOut page");
+            return IndexPage();
+        }
+
+        public IActionResult SignedOut(HttpContext context, IdentityProviderId provider, string redirect)
+        {
+            _logger.Information($"Serving the SignedOut page - with external provider");
+            return new RedirectResult($"/signout/external?idp={provider}&rd={redirect}", false);
+        }
+
+        public IActionResult SignOutExternalProvider(HttpContext context, IdentityProviderId provider)
+        {
+            _logger.Information($"Serving the SignOutExternalProvider page");
+            return IndexPage();
+        }
+
         public IActionResult SpecifiedProviderDoesNotExist(HttpContext context, IdentityProviderId provider)
         {
             _logger.Information($"Serving the SpecifiedProviderDoesNotExist page");
