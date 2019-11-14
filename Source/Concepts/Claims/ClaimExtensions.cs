@@ -10,7 +10,7 @@ namespace Concepts.Claims
 {
     public static class ClaimExtensions
     {
-        const string IdentityProviderClaimType = "iss";
+        const string IdentityProviderClaimType = "idp";
         const string SubjectClaimType = "sub";
 
         public static bool IsIdentityProviderClaim(this Claim claim, out IdentityProviderClaim identityProviderClaim)
