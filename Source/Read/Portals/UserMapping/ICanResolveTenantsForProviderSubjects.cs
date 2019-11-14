@@ -12,7 +12,7 @@ namespace Read.Portals.UserMapping
 {
     public interface ICanResolveTenantsForProviderSubjects
     {
-        IEnumerable<TenantId> GetTenantsFor(IssuerClaim issuer, SubjectClaim subject);
+        IEnumerable<TenantId> GetTenantsFor(IdentityProviderClaim issuer, SubjectClaim subject);
         IEnumerable<TenantId> GetTenantsFor(ClaimsPrincipal principal);
     }
 }

@@ -5,12 +5,13 @@
 
 using System.Security.Claims;
 using Concepts.Claims;
+using Concepts.Providers;
 
 namespace Read.Users
 {
     public interface ICanResolveUserForProviderSubjects
     {
-        bool TryGetUserFor(IssuerClaim issuer, SubjectClaim subject, out User user);
+        bool TryGetUserFor(IdentityProviderClaim provider, SubjectClaim subject, out User user);
         bool TryGetUserFor(ClaimsPrincipal principal, out User user);
     }
 }

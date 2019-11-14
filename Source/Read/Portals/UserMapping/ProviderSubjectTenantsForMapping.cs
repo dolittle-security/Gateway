@@ -15,7 +15,7 @@ namespace Read.Portals.UserMapping
     {
         public ObjectId Id { get; private set; } = ObjectId.GenerateNewId();
         public PortalId Portal { get; set; }
-        public IssuerClaim Issuer { get; set; }
+        public IdentityProviderClaim Provider { get; set; }
         public SubjectClaim Subject { get; set; }
         public ICollection<TenantId> Tenants { get; set; }
     }

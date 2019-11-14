@@ -26,6 +26,7 @@ namespace Providers.Claims
             var configuration = _configurations.GetCommonProviderConfiguration(providerId);
             var identity = new ClaimsIdentity("Dolittle.Security"); // TODO: Again - circular dependency
 
+            identity.AddClaim("idp", providerId.Value.ToString());
             identity.AddClaim("iss", GetSingleRequiredClaimOrThrow(original, "iss"));
             identity.AddClaim("sub", GetSingleRequiredClaimOrThrow(original, "sub"));
             identity.AddClaim("aud", GetSingleRequiredClaimOrThrow(original, "aud"));
@@ -40,11 +41,6 @@ namespace Providers.Claims
             foreach ((var type, var value) in configuration.StaticClaims)
             {
                 identity.AddClaim(type, value);
-            }
-
-            foreach (var claim in identity.Claims)
-            {
-                System.Console.WriteLine($"!!!!!!! Resulting Claims {claim.Type}: {claim.Value}");
             }
 
             return new ClaimsPrincipal(identity);

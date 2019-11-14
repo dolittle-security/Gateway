@@ -27,11 +27,11 @@ namespace Read.Portals.UserMapping
             _logger = logger;
         }
 
-        public IEnumerable<TenantId> GetTenantsFor(IssuerClaim issuer, SubjectClaim subject)
+        public IEnumerable<TenantId> GetTenantsFor(IdentityProviderClaim provider, SubjectClaim subject)
         {
             var portal = _manager.Current.Portal;
             var builder = Builders<ProviderSubjectTenantsForMapping>.Filter;
-            var filter = builder.Eq(_ => _.Portal, portal) & builder.Eq(_ => _.Issuer, issuer) & builder.Eq(_ => _.Subject, subject);
+            var filter = builder.Eq(_ => _.Portal, portal) & builder.Eq(_ => _.Provider, provider) & builder.Eq(_ => _.Subject, subject);
 
             var tenantMappings = _mappings.Find(filter).ToEnumerable();
             switch (tenantMappings.Count())
@@ -43,16 +43,16 @@ namespace Read.Portals.UserMapping
                 return tenantMappings.First().Tenants;
 
                 default:
-                _logger.Warning($"Found multiple mappings for portal:'{portal}', issuer:'{issuer}', subject:'{subject}'. All tenants will be returned, but this indicates something wrong in the database, and should be fixed.");
+                _logger.Warning($"Found multiple mappings for portal:'{portal}', provider:'{provider}', subject:'{subject}'. All tenants will be returned, but this indicates something wrong in the database, and should be fixed.");
                 return tenantMappings.SelectMany(_ => _.Tenants);
             }
         }
 
         public IEnumerable<TenantId> GetTenantsFor(ClaimsPrincipal principal)
         {
-            if (principal.TryGetIssuerSubjectClaims(out var issuer, out var subject))
+            if (principal.TryGetProviderSubjectClaims(out var provider, out var subject))
             {
-                return GetTenantsFor(issuer, subject);
+                return GetTenantsFor(provider, subject);
             }
             else
             {

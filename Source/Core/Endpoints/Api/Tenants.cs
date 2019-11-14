@@ -30,9 +30,9 @@ namespace Core.Endpoints.Api
             var authResult = await HttpContext.AuthenticateAsync(Constants.ExternalCookieSchemeName);
             if (authResult.Succeeded)
             {
-                if (authResult.Principal.TryGetIssuerSubjectClaims(out var issuer, out var subject))
+                if (authResult.Principal.TryGetProviderSubjectClaims(out var provider, out var subject))
                 {
-                    return new ActionResult<IEnumerable<TenantId>>(_mapper.GetTenantsFor(issuer, subject));
+                    return new ActionResult<IEnumerable<TenantId>>(_mapper.GetTenantsFor(provider, subject));
                 }
             }
             return Unauthorized();

@@ -10,13 +10,13 @@ namespace Concepts.Claims
 {
     public static class ClaimExtensions
     {
-        const string IssuerClaimType = "iss";
+        const string IdentityProviderClaimType = "iss";
         const string SubjectClaimType = "sub";
 
-        public static bool IsIssuerClaim(this Claim claim, out IssuerClaim issuerClaim)
+        public static bool IsIdentityProviderClaim(this Claim claim, out IdentityProviderClaim identityProviderClaim)
         {
-            issuerClaim = claim.Value;
-            return claim.Type.Equals(IssuerClaimType, StringComparison.InvariantCultureIgnoreCase);
+            identityProviderClaim = claim.Value;
+            return claim.Type.Equals(IdentityProviderClaimType, StringComparison.InvariantCultureIgnoreCase);
         }
 
         public static bool IsSubjectClaim(this Claim claim, out SubjectClaim subjectClaim)

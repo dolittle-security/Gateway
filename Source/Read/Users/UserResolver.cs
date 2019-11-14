@@ -22,11 +22,11 @@ namespace Read.Users
             _logger = logger;
         }
 
-        public bool TryGetUserFor(IssuerClaim issuer, SubjectClaim subject, out User user)
+        public bool TryGetUserFor(IdentityProviderClaim provider, SubjectClaim subject, out User user)
         {
             user = null;
-            var builder = Builders<IssuerSubjectPair>.Filter;
-            var elementFilter = builder.Eq(_ => _.Issuer, issuer) & builder.Eq(_ => _.Subject, subject);
+            var builder = Builders<ProviderSubjectPair>.Filter;
+            var elementFilter = builder.Eq(_ => _.Provider, provider) & builder.Eq(_ => _.Subject, subject);
             var filter = Builders<User>.Filter.ElemMatch(_ => _.Mappings, elementFilter);
 
             var userMappings = _users.Find(filter).ToEnumerable();
@@ -40,16 +40,16 @@ namespace Read.Users
                 return true;
 
                 default:
-                _logger.Error($"Multiple possible user mappings for issuer:'{issuer}' subject:'{subject}' was found. Cannot pick one - authentication will fail.");
+                _logger.Error($"Multiple possible user mappings for provider:'{provider}' subject:'{subject}' was found. Cannot pick one - authentication will fail.");
                 return false;
             }
         }
 
         public bool TryGetUserFor(ClaimsPrincipal principal, out User user)
         {
-            if (principal.TryGetIssuerSubjectClaims(out var issuer, out var subject))
+            if (principal.TryGetProviderSubjectClaims(out var provider, out var subject))
             {
-                return TryGetUserFor(issuer, subject, out user);
+                return TryGetUserFor(provider, subject, out user);
             }
             else
             {

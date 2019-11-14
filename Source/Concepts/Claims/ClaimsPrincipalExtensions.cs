@@ -9,18 +9,18 @@ namespace Concepts.Claims
 {
     public static class ClaimsPrincipalExtensions
     {
-        public static bool TryGetIssuerSubjectClaims(this ClaimsPrincipal principal, out IssuerClaim issuer, out SubjectClaim subject)
+        public static bool TryGetProviderSubjectClaims(this ClaimsPrincipal principal, out IdentityProviderClaim provider, out SubjectClaim subject)
         {
-            var issuerFound = false;
+            var providerFound = false;
             var subjectFound = false;
-            issuer = "";
+            provider = "";
             subject = "";
             foreach (var claim in principal.Claims)
             {
-                if (claim.IsIssuerClaim(out var issuerClaim))
+                if (claim.IsIdentityProviderClaim(out var providerClaim))
                 {
-                    issuerFound = true;
-                    issuer = issuerClaim;
+                    providerFound = true;
+                    provider = providerClaim;
                 }
                 if (claim.IsSubjectClaim(out var subjectClaim))
                 {
@@ -28,7 +28,7 @@ namespace Concepts.Claims
                     subject = subjectClaim;
                 }
             }
-            return issuerFound && subjectFound;
+            return providerFound && subjectFound;
         }
     }
 }

@@ -12,6 +12,6 @@ namespace Read.Users
     public class User
     {
         public UserId Id { get; set; }
-        public ICollection<IssuerSubjectPair> Mappings { get; set; }
+        public ICollection<ProviderSubjectPair> Mappings { get; set; }
     }
 }
