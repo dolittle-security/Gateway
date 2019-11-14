@@ -12,6 +12,6 @@ namespace Authentication
 {
     public interface ICanSignUserInToTenant
     {
-        IActionResult SignUserInTo(HttpContext context, TenantId tenant, Uri redirectUri);
+        IActionResult SignUserInTo(HttpContext context, TenantId tenant, string redirectUri);
     }
 }

@@ -20,7 +20,7 @@ namespace Core.Endpoints.External
         }
 
         [HttpGet]
-        public IActionResult Signin(Uri rd, Guid tenant)
+        public IActionResult Signin(string rd, Guid tenant)
         {
             return _authenticator.SignUserInTo(HttpContext, tenant, rd);
         }

@@ -31,7 +31,7 @@ namespace Authentication
             _generator = generator;
         }
 
-        public IActionResult SignUserInTo(HttpContext context, TenantId tenant, Uri redirectUri)
+        public IActionResult SignUserInTo(HttpContext context, TenantId tenant, string redirectUri)
         {
             var authResult = context.AuthenticateAsync(Constants.ExternalCookieSchemeName).Result;
             if (authResult.Succeeded)
@@ -49,13 +49,13 @@ namespace Authentication
             return new UnauthorizedResult();
         }
 
-        IActionResult SetTenantCredentialsFor(HttpContext context, ICanResolveUserForProviderSubjects userMapper, ClaimsPrincipal portalPrincipal, Uri redirectUri)
+        IActionResult SetTenantCredentialsFor(HttpContext context, ICanResolveUserForProviderSubjects userMapper, ClaimsPrincipal portalPrincipal, string redirectUri)
         {
             if (userMapper.TryGetUserFor(portalPrincipal, out var user))
             {
                 var tenantPrincipal = _generator.GenerateFor(user);
                 context.SignInAsync(Constants.InternalCookieSchemeName, tenantPrincipal);
-                return new RedirectResult(redirectUri.ToString(), false);
+                return new RedirectResult(redirectUri, false);
             }
             return new UnauthorizedResult();
         }

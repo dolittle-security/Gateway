@@ -21,7 +21,7 @@ namespace Core.Endpoints.External
         }
 
         [HttpGet]
-        public IActionResult Signin(Uri rd, Guid ip)
+        public IActionResult Signin(string rd, Guid ip)
         {
             return _authenticator.Challenge(HttpContext, ip, rd);
         }

@@ -26,11 +26,11 @@ namespace Authentication
             _providers = providers;
         }
 
-        public IActionResult Challenge(HttpContext context, IdentityProviderId providerId, Uri redirectUri)
+        public IActionResult Challenge(HttpContext context, IdentityProviderId providerId, string redirectUri)
         {
             if (_providers.AllAvailableIdentityProvidersForChoosing().Any(_ => _.Id == providerId))
             {
-                var url = HttpUtility.UrlEncode(redirectUri.ToString());
+                var url = HttpUtility.UrlEncode(redirectUri);
 
                 // TODO: Set some state properties here?
                 return new ChallengeResult(providerId.ToString(), new AuthenticationProperties {

@@ -12,6 +12,6 @@ namespace Authentication
 {
     public interface ICanTriggerRemoteAuthentication
     {
-        IActionResult Challenge(HttpContext context, IdentityProviderId providerId, Uri redirectUri);
+        IActionResult Challenge(HttpContext context, IdentityProviderId providerId, string redirectUri);
     }
 }

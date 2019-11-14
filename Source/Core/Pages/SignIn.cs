@@ -37,7 +37,7 @@ namespace Core.Pages
         }
 
         [HttpGet]
-        public IActionResult Signin(Uri rd)
+        public IActionResult Signin(string rd)
         {
             var providers = _resolver.AllAvailableIdentityProvidersForChoosing();
             switch (providers.Count())
@@ -60,7 +60,7 @@ namespace Core.Pages
         }
 
         [HttpGet("Tenant")]
-        public async Task<IActionResult> SelectTenant(Uri rd)
+        public async Task<IActionResult> SelectTenant(string rd)
         {
             var authResult = await HttpContext.AuthenticateAsync(Constants.ExternalCookieSchemeName);
             if (authResult.Succeeded)
