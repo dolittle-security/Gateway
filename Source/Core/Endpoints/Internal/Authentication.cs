@@ -23,7 +23,7 @@ namespace Core.Endpoints.Internal
             var result = await HttpContext.AuthenticateAsync(Constants.CompositeSchemeName);
             if (result.Succeeded)
             {
-                HttpContext.Response.Headers["Claim"] = (StringValues)result.Principal.Claims.Select(_ => $"{_.Type}={_.Value}");
+                HttpContext.Response.Headers["Claim"] = new StringValues(result.Principal.Claims.Select(_ => $"{_.Type}={_.Value}").ToArray());
                 return Ok();
             }
             else
