@@ -107,6 +107,7 @@ namespace Core
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
+            app.UseForwardedHeaders();
             app.UsePortalContext();
             app.UseDolittle();
             app.UseIdentityServer();
