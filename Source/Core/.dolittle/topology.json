@@ -9,6 +9,19 @@
           "subFeatures": {}
         }
       }
+    },
+    "e25d1758-4ee6-482a-a459-eee897f3bf55": {
+      "name": "Tenants",
+      "subFeatures": {
+        "62811427-6027-41a0-b00d-cec7b06a50fb": {
+          "name": "Choosing",
+          "subFeatures": {}
+        }
+      }
+    },
+    "c87093fd-7ba0-459c-a5a6-e69930af642c": {
+      "name": "SignOut",
+      "subFeatures": {}
     }
   }
 }

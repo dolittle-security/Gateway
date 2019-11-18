@@ -67,7 +67,7 @@ namespace Core
 
             services.AddSingleton<IKeyMaterialService, KeyMaterialService>();
 
-            _bootResult = services.AddDolittle(_ => { _.TenantIdHeaderName = "Owner-Tenant-ID"; }, _loggerFactory);
+            _bootResult = services.AddDolittle(_ => _.ExecutionContextSetup.TenantIdHeaderName = "Owner-Tenant-ID", _loggerFactory);
 
             services.AddMvc().AddJsonOptions(_ => {
                _.SerializerSettings.Converters.Add(new ConceptConverter()); 
