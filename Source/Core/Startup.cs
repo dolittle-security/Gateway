@@ -20,6 +20,7 @@ using Microsoft.Extensions.DependencyInjection.Extensions;
 using Microsoft.AspNetCore.Http;
 using IdentityServer4.Configuration;
 using Core.IdentityServer;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace Core
 {
@@ -107,7 +108,9 @@ namespace Core
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseForwardedHeaders();
+            app.UseForwardedHeaders(new ForwardedHeadersOptions {
+                ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
+            });
             app.UsePortalContext();
             app.UseDolittle();
             app.UseIdentityServer();
