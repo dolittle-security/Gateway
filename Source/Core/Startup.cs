@@ -51,6 +51,13 @@ namespace Core
             ConfigureAuthentication(services);
             ConfigureIdentityServer(services);
 
+            services.Configure<ForwardedHeadersOptions>(_ => {
+                _.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedProto;
+                _.KnownNetworks.Clear();
+                _.KnownProxies.Clear();
+
+            });
+
             _bootResult = services.AddDolittle(_ => {
                 _.ExecutionContextSetup.TenantIdHeaderName = "Owner-Tenant-ID";
                 //_.ExecutionContextSetup.SkipAuthentication = true;
@@ -108,9 +115,7 @@ namespace Core
 
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            app.UseForwardedHeaders(new ForwardedHeadersOptions {
-                ForwardedHeaders = ForwardedHeaders.XForwardedHost | ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto,
-            });
+            app.UseForwardedHeaders();
             app.UsePortalContext();
             app.UseDolittle();
             app.UseIdentityServer();
