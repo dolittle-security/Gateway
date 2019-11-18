@@ -36,8 +36,8 @@ namespace Providers.Dynamic
                 Authority = configuration.Authority,
                 ClientId = configuration.ClientId,
                 ClientSecret = configuration.ClientSecret,
-                CallbackPath = $"/signin/oidc-{configuration.Id}",
-                SignedOutCallbackPath = $"/signout/oidc-{configuration.Id}",
+                CallbackPath = $"/Dolittle/signin/oidc-{configuration.Id}",
+                SignedOutCallbackPath = $"/Dolittle/signout/oidc-{configuration.Id}",
             };
             options.ClaimActions.Clear();
             _manager.AddIdentityProvider<OpenIdConnectHandler, OpenIdConnectOptions>(configuration.Id, options);
