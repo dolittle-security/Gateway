@@ -3,12 +3,14 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
+using System.Linq;
 using System.Threading.Tasks;
 using System.Web;
 using Authentication;
 using Dolittle.Collections;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Primitives;
 
 namespace Core.Endpoints.Internal
 {
@@ -21,15 +23,12 @@ namespace Core.Endpoints.Internal
             var result = await HttpContext.AuthenticateAsync(Constants.CompositeSchemeName);
             if (result.Succeeded)
             {
-                var claims = "Claims:\n";
-                result.Principal.Claims.ForEach(_ => claims += $"{_.Type}: {_.Value}\n");
-                return Ok(claims);
+                HttpContext.Response.Headers["Claim"] = (StringValues)result.Principal.Claims.Select(_ => $"{_.Type}={_.Value}");
+                return Ok();
             }
             else
             {
-                //return Unauthorized();
-                var url = HttpUtility.UrlEncode("/auth");
-                return Redirect($"/signin?rd={url}");
+                return Unauthorized();
             }
         }
     }

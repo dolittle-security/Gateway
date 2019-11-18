@@ -8,6 +8,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Authentication;
 using Authentication.Frontend;
+using Dolittle.Configuration;
 using Dolittle.Logging;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Mvc;
