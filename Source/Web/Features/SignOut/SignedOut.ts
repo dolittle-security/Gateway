@@ -8,7 +8,7 @@ import { Provider } from './Provider';
 import { ExternalProvider } from './ExternalProvider';
 
 @autoinject
-export class SignedOut {¯
+export class SignedOut {
   externalProvider: Provider | undefined;
   providerId: string = '';
 
