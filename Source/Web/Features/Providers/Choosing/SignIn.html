@@ -1,0 +1,23 @@
+<template>
+        <require from="./SignIn.scss"></require>
+    
+        <section class="signin">
+            <div style="background-color:black">
+                <h1>Login</h1>
+                <h2>Choose preferred provider to login.</h2>
+                <ul class="option-list">
+                    <li repeat.for="provider of providers">
+                        
+                        <a href="/Dolittle/Sentry/Gateway/SignIn?ip=${provider.id}&rd=${redirectUrl}" target="_top">
+                            <figure>
+                                <!--<img src="#" alt="icon">-->
+                            </figure>
+                            <div>
+                                <strong class="provider-name">${provider.name}</strong>
+                            </div>
+                        </a>
+                    </li>                   
+                </ul>
+            </div>
+        </section>
+    </template>

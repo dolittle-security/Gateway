@@ -11,7 +11,7 @@
         <DolittleBoundedContextConfigPath>../bounded-context.json</DolittleBoundedContextConfigPath>
         <DolittleUseModules>False</DolittleUseModules>
         <DolittleNamespaceSegmentsToStrip/>
-        <DolittleGenerateProxies>False</DolittleGenerateProxies>
+        <DolittleGenerateProxies>True</DolittleGenerateProxies>
         <DolittleProxiesBasePath>../Web/Features</DolittleProxiesBasePath>
     </PropertyGroup>
 

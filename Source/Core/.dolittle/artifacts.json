@@ -15,5 +15,39 @@
         "type": "Read.Providers.Choosing.ProvidersForPortal, Read"
       }
     }
+  },
+  "62811427-6027-41a0-b00d-cec7b06a50fb": {
+    "commands": {},
+    "events": {},
+    "eventSources": {},
+    "readModels": {
+      "99bf6bff-7abf-401d-a88a-9003943de942": {
+        "generation": 1,
+        "type": "Read.Tenants.Choosing.Tenant, Read"
+      }
+    },
+    "queries": {
+      "6ab43195-922a-43c0-bdb7-e29d25782bb9": {
+        "generation": 1,
+        "type": "Read.Tenants.Choosing.AvailableTenants, Read"
+      }
+    }
+  },
+  "c87093fd-7ba0-459c-a5a6-e69930af642c": {
+    "commands": {},
+    "events": {},
+    "eventSources": {},
+    "readModels": {
+      "02f20817-32b8-4d3c-a968-6f07df636990": {
+        "generation": 1,
+        "type": "Read.SignOut.Provider, Read"
+      }
+    },
+    "queries": {
+      "b63387dd-7a2b-4cb3-bcea-b9ec32c5f49d": {
+        "generation": 1,
+        "type": "Read.SignOut.ExternalProvider, Read"
+      }
+    }
   }
 }
