@@ -7,8 +7,18 @@ using Dolittle.Concepts;
 
 namespace Concepts.Claims
 {
-    public class IdentityProviderClaim : ConceptAs<string>
+    public class IdentityProviderClaim : ClaimValue
     {
-        public static implicit operator IdentityProviderClaim(string idp) => new IdentityProviderClaim { Value = idp };
+        public static explicit operator IdentityProviderClaim(string idp)
+        {
+            if (TryFromString(idp, out var claimValue))
+            {
+                return new IdentityProviderClaim { Value = claimValue.Value };
+            }
+            else
+            {
+                throw new IdentityProviderClaimInvalidCharacters(idp);
+            }
+        }
     }
 }

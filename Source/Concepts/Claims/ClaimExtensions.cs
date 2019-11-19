@@ -15,14 +15,24 @@ namespace Concepts.Claims
 
         public static bool IsIdentityProviderClaim(this Claim claim, out IdentityProviderClaim identityProviderClaim)
         {
-            identityProviderClaim = claim.Value;
-            return claim.Type.Equals(IdentityProviderClaimType, StringComparison.InvariantCultureIgnoreCase);
+            identityProviderClaim = new IdentityProviderClaim();
+            if (claim.Type.Equals(IdentityProviderClaimType, StringComparison.InvariantCultureIgnoreCase) && IdentityProviderClaim.TryFromString(claim.Value, out var claimValue))
+            {
+                identityProviderClaim = new IdentityProviderClaim{ Value = claim.Value };
+                return true;
+            }
+            return false;
         }
 
         public static bool IsSubjectClaim(this Claim claim, out SubjectClaim subjectClaim)
         {
-            subjectClaim = claim.Value;
-            return claim.Type.Equals(SubjectClaimType, StringComparison.InvariantCultureIgnoreCase);
+            subjectClaim = new SubjectClaim();
+            if (claim.Type.Equals(SubjectClaimType, StringComparison.InvariantCultureIgnoreCase) && SubjectClaim.TryFromString(claim.Value, out var claimValue))
+            {
+                subjectClaim = new SubjectClaim{ Value = claim.Value };
+                return true;
+            }
+            return false;
         }
     }
 }

@@ -13,8 +13,8 @@ namespace Concepts.Claims
         {
             var providerFound = false;
             var subjectFound = false;
-            provider = "";
-            subject = "";
+            provider = new IdentityProviderClaim();
+            subject = new SubjectClaim();
             foreach (var claim in principal.Claims)
             {
                 if (claim.IsIdentityProviderClaim(out var providerClaim))
@@ -27,6 +27,7 @@ namespace Concepts.Claims
                     subjectFound = true;
                     subject = subjectClaim;
                 }
+                if (providerFound && subjectFound) break;
             }
             return providerFound && subjectFound;
         }

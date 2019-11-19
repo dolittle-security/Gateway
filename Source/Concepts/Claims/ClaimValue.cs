@@ -9,6 +9,24 @@ namespace Concepts.Claims
 {
     public class ClaimValue : ConceptAs<string>
     {
-        public static implicit operator ClaimValue(string value) => new ClaimValue { Value = value };
+        public static explicit operator ClaimValue(string value)
+        {
+            if (TryFromString(value, out var claimValue))
+            {
+                return claimValue;
+            }
+            else
+            {
+                throw new ClaimValueContainsInvalidCharacters(value);
+            }
+        }
+
+        public static bool TryFromString(string value, out ClaimValue claimValue)
+        {
+            claimValue = default(ClaimValue);
+            if (value.Contains(",")) return false;
+            claimValue = new ClaimValue { Value = value };
+            return true;
+        }
     }
 }

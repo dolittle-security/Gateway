@@ -7,8 +7,18 @@ using Dolittle.Concepts;
 
 namespace Concepts.Claims
 {
-    public class SubjectClaim : ConceptAs<string>
+    public class SubjectClaim : ClaimValue
     {
-        public static implicit operator SubjectClaim(string sub) => new SubjectClaim { Value = sub };
+        public static explicit operator SubjectClaim(string sub)
+        {
+            if (TryFromString(sub, out var claimValue))
+            {
+                return new SubjectClaim{ Value = sub };
+            }
+            else
+            {
+                throw new SubjectClaimInvalidCharacters(sub);
+            }
+        }
     }
 }
