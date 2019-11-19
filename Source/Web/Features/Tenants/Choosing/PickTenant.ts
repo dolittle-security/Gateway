@@ -3,22 +3,22 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { autoinject } from 'aurelia-dependency-injection';
-import { QueryCoordinator } from '@dolittle/queries';
+import { QueryCoordinator } from '@dolittle/queries';
 import { AvailableTenants } from './AvailableTenants';
-import { Tenant } from './Tenant';
+import { Tenant } from './Tenant';
 import { Router } from 'aurelia-router';
 
 @autoinject
 export class SignIn {
-  tenants:Tenant[] = [];
-  redirectUrl:string = '';
+  tenants: Tenant[] = [];
+  redirectUrl: string = '';
 
-  constructor(private _queryCoordinator:QueryCoordinator, private _router:Router) { 
-    this.populate()
+  constructor(private _queryCoordinator: QueryCoordinator, private _router: Router) {
+    this.populate();
   }
 
-  activate(params:any) {
-    this.redirectUrl = params.rd||'';
+  activate(params: any) {
+    this.redirectUrl = params.rd || '';
   }
 
   private async populate() {
