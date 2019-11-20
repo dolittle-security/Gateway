@@ -10,7 +10,7 @@ export function registerProvidersForPortal(queryCoordinator: QueryCoordinatorMoc
       },
       {
         id: '01',
-        name: 'Provider 2'
+        name: 'Long Provider 2'
       },
       {
         id: '02',

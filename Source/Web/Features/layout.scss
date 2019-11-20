@@ -5,6 +5,22 @@
 @import '../styles/Settings/all';
 @import '../styles/Tools/all.scss';
 
+$site-background: '/assets/images/mohammad-alizade-341348.png';
+html,
 body {
-  background-color: chartreuse;
+  height: 100%;
+  padding: $grid-gutter/2;
+  @include media-bp-min(tablet) {
+    padding: 0;
+  }
+}
+body {
+  background: url($site-background) no-repeat fixed center;
+  background-size: cover;
+  .acrylic {
+    &::before {
+      background: #333 url($site-background) fixed center;
+      background-size: cover;
+    }
+  }
 }

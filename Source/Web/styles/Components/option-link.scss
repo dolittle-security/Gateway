@@ -1,0 +1,21 @@
+/*---------------------------------------------------------------------------------------------
+ *  Copyright (c) Dolittle. All rights reserved.
+ *  Licensed under the MIT License. See LICENSE in the project root for license information.
+ *--------------------------------------------------------------------------------------------*/
+@import '~DolittleStyles/Settings/all';
+@import '~DolittleStyles/Tools/all';
+
+.option-link {
+  background-color: rgba(255, 255, 255, 0.2);
+  color: rgba(255, 255, 255, 1);
+  display: flex;
+  align-items: center;
+  font-weight: 400;
+  font-size: 1rem;
+  padding: 0 $grid-gutter;
+  margin-bottom: $grid-gutter;
+  height: $grid-gutter * 2;
+  figure {
+    padding-right: $grid-gutter;
+  }
+}
