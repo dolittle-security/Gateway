@@ -1,10 +1,16 @@
 const path = require('path');
 require('dotenv').config();
+const process = require('process');
+
 
 const webpack = require('@dolittle/typescript.webpack.aurelia').webpack
 const config = webpack(__dirname);
 
-module.exports = () => {
+module.exports = (environment) => {
+    if (environment && environment.production) {
+        process.env.DOLITTLE_WEBPACK_BASE_URL = '/signin/'
+    }
+
     const obj = config.apply(null, arguments);
 
     let headers = {
