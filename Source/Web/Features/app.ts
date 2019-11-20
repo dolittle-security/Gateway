@@ -1,6 +1,5 @@
 import { PLATFORM } from 'aurelia-pal';
 import { Router, RouterConfiguration } from 'aurelia-router';
-import { QueryCoordinator } from '@dolittle/queries';
 
 export class App {
   router: any;
