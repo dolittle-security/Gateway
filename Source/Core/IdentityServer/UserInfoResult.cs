@@ -51,6 +51,15 @@ namespace Core.IdentityServer
 
         private object GetValue(Claim claim)
         {
+            if (bool.TryParse(claim.Value, out var boolValue))
+            {
+                return boolValue;
+            }
+            if (long.TryParse(claim.Value, out var longValue))
+            {
+                return longValue;
+            }
+            // TODO: JSON type claims
             return claim.Value;
         }
     }
