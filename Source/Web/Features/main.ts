@@ -21,6 +21,8 @@ export function configure(aurelia: Aurelia) {
     registerProvidersForPortal(queryCoordinatorMock);
     registerAvailableTenants(queryCoordinatorMock);
     aurelia.container.registerInstance(QueryCoordinator, queryCoordinatorMock);
+  } else {
+    QueryCoordinator.apiBaseUrl = '/api/Dolittle/Security/Gateway/';
   }
 
   aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
