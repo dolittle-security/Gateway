@@ -7,6 +7,7 @@ using System.IO;
 using System.Text;
 using Concepts.Providers;
 using Dolittle.Logging;
+using IdentityServer4.Models;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 
@@ -39,10 +40,34 @@ namespace Authentication.Frontend
             return IndexPage();
         }
 
+        public IActionResult DeviceSignInAccessDenied(HttpContext context, DeviceFlowAuthorizationRequest deviceContext)
+        {
+            _logger.Information($"Serving the DeviceSignInAccessDenied page");
+            return new RedirectResult("/signin/error?id=device-access-denied", false);
+        }
+
+        public IActionResult DeviceSignInError(HttpContext context, string errorDescription)
+        {
+            _logger.Information($"Serving the DeviceSignInError page");
+            return new RedirectResult($"/signin/error?id=device-error&message={errorDescription}", false);
+        }
+
+        public IActionResult DeviceSignInSuccess(HttpContext context, DeviceFlowAuthorizationRequest deviceContext)
+        {
+            _logger.Information($"Serving the DeviceSignInSuccess page");
+            return new OkResult();
+        }
+
         public IActionResult Error(HttpContext context)
         {
             _logger.Information($"Serving the Error page");
             return IndexPage();
+        }
+
+        public IActionResult InvalidDeviceUserCode(HttpContext context, string userCode)
+        {
+            _logger.Information($"Serving the InvalidDeviceUserCode page");
+            return new RedirectResult("/signin/error?id=device-user-code-invalid", false);
         }
 
         public IActionResult NoProvidersAvailable(HttpContext context)

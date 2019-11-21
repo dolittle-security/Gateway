@@ -25,15 +25,25 @@ namespace Core.Pages
         readonly IAuthenticationFrontend _frontend;
         readonly ICanTriggerRemoteAuthentication _remoteAuthenticator;
         readonly ICanSignUserInToTenant _tenantAuthenticator;
+        readonly ICanHandleDeviceAuthorization _deviceAuthorizer;
         readonly ILogger _logger;
 
-        public SignIn(ICanResolveProvidersForChoosing resolver, ICanResolveTenantsForProviderSubjects mapper, IAuthenticationFrontend frontend, ICanTriggerRemoteAuthentication remoteAuthenticator, ICanSignUserInToTenant tenantAuthenticator, ILogger logger)
+        public SignIn(
+            ICanResolveProvidersForChoosing resolver,
+            ICanResolveTenantsForProviderSubjects mapper,
+            IAuthenticationFrontend frontend,
+            ICanTriggerRemoteAuthentication remoteAuthenticator,
+            ICanSignUserInToTenant tenantAuthenticator,
+            ICanHandleDeviceAuthorization deviceAuthorizer,
+            ILogger logger
+        )
         {
             _resolver = resolver;
             _mapper = mapper;
             _frontend = frontend;
             _remoteAuthenticator = remoteAuthenticator;
             _tenantAuthenticator = tenantAuthenticator;
+            _deviceAuthorizer = deviceAuthorizer;
             _logger = logger;
         }
 
@@ -83,14 +93,21 @@ namespace Core.Pages
         }
 
         [HttpGet("Device")]
-        public async Task<IActionResult> Device()
+        public async Task<IActionResult> Device(string userCode)
         {
             var authResult = await HttpContext.AuthenticateAsync(Constants.InternalCookieSchemeName);
             if (authResult.Succeeded)
             {
-                return _frontend.DeviceSignIn(HttpContext);
+                if (!string.IsNullOrWhiteSpace(userCode))
+                {
+                    return await _deviceAuthorizer.HandleAsync(HttpContext, userCode);
+                }
+                else
+                {
+                    return _frontend.DeviceSignIn(HttpContext);
+                }
             }
-            return Signin("/signin/device");
+            return Signin("/signin/device?userCode="+userCode);
         }
     }
 }

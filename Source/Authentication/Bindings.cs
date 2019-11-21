@@ -14,6 +14,7 @@ namespace Authentication
             builder.Bind<ICanTriggerRemoteAuthentication>().To<RemoteAuthenticator>();
             builder.Bind<ICanSignUserInToTenant>().To<LocalAuthenticator>();
             builder.Bind<ICanGenerateTenantPrincipal>().To<TenantPrincipalGenerator>();
+            builder.Bind<ICanHandleDeviceAuthorization>().To<DeviceAuthorizer>();
         }
     }
 }
