@@ -9,6 +9,9 @@
             "host": "mongodb://localhost:27017",
             "database": "dev_event_store",
             "useSSL": false
+        },
+        "files": {
+            "rootPath": "./wwwroot/"
         }
     },
     "00fa79c4-9b95-43c1-8058-bb6e01e2ecab": {
@@ -21,6 +24,9 @@
             "host": "mongodb://localhost:27017",
             "database": "one_event_store",
             "useSSL": false
+        },
+        "files": {
+            "rootPath": "./wwwroot/"
         }
     },
     "7a888183-b147-4ce3-bd4d-118133f13e4b": {
@@ -33,6 +39,9 @@
             "host": "mongodb://localhost:27017",
             "database": "two_event_store",
             "useSSL": false
+        },
+        "files": {
+            "rootPath": "./wwwroot/"
         }
     }
 }

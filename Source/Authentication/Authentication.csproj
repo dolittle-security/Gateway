@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <PackageReference Include="Dolittle.DependencyInversion.Autofac" Version="4.*" />
+    <PackageReference Include="Dolittle.IO.Tenants" Version="4.*" />
 
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
     <PackageReference Include="IdentityServer4" Version="2.5.3" />

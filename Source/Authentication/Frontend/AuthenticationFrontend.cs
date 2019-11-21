@@ -15,10 +15,12 @@ namespace Authentication.Frontend
 {
     public class AuthenticationFrontend : IAuthenticationFrontend
     {
+        readonly ICustomFrontendServer _server;
         readonly ILogger _logger;
 
-        public AuthenticationFrontend(ILogger logger)
+        public AuthenticationFrontend(ICustomFrontendServer server, ILogger logger)
         {
+            _server = server;
             _logger = logger;
         }
 
@@ -108,12 +110,7 @@ namespace Authentication.Frontend
 
         IActionResult IndexPage()
         {
-            return new ContentResult
-            {
-                StatusCode = StatusCodes.Status200OK,
-                ContentType = "text/html; charset=UTF-8",
-                Content = File.ReadAllText("./spa.html", Encoding.UTF8),
-            };
+            return _server.ServeFile("index.html");
         }
     }
 }

@@ -22,6 +22,7 @@ namespace Core.Pages
     {
         readonly ICanResolveProvidersForChoosing _resolver;
         readonly ICanResolveTenantsForProviderSubjects _mapper;
+        readonly ICustomFrontendServer _server;
         readonly IAuthenticationFrontend _frontend;
         readonly ICanTriggerRemoteAuthentication _remoteAuthenticator;
         readonly ICanSignUserInToTenant _tenantAuthenticator;
@@ -31,6 +32,7 @@ namespace Core.Pages
         public SignIn(
             ICanResolveProvidersForChoosing resolver,
             ICanResolveTenantsForProviderSubjects mapper,
+            ICustomFrontendServer server,
             IAuthenticationFrontend frontend,
             ICanTriggerRemoteAuthentication remoteAuthenticator,
             ICanSignUserInToTenant tenantAuthenticator,
@@ -40,11 +42,18 @@ namespace Core.Pages
         {
             _resolver = resolver;
             _mapper = mapper;
+            _server = server;
             _frontend = frontend;
             _remoteAuthenticator = remoteAuthenticator;
             _tenantAuthenticator = tenantAuthenticator;
             _deviceAuthorizer = deviceAuthorizer;
             _logger = logger;
+        }
+
+        [HttpGet("{*file}")]
+        public IActionResult ServeFile(string file)
+        {
+            return _server.ServeFile(file);
         }
 
         [HttpGet]
