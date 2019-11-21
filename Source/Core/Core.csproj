@@ -32,7 +32,7 @@
         <PackageReference Include="Dolittle.Runtime.Events.MongoDB" Version="4.*" />
         <PackageReference Include="Dolittle.ReadModels.MongoDB" Version="4.*" />
 
-        <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
+        <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" AllowExplicitVersion="true" />
         <PackageReference Include="Autofac.Extensions.DependencyInjection" Version="4.2.0" />
         <PackageReference Include="Swashbuckle.AspNetCore" Version="2.0.0" />
         <PackageReference Include="IdentityServer4" Version="2.5.3" />

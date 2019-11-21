@@ -12,6 +12,6 @@
     <PackageReference Include="Dolittle.Booting" Version="4.*" />
     <PackageReference Include="Dolittle.DependencyInversion.Autofac" Version="4.*" />
 
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" AllowExplicitVersion="true" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.9" AllowExplicitVersion="true" />
   </ItemGroup>
 </Project>
