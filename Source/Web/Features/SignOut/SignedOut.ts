@@ -12,9 +12,7 @@ export class SignedOut {
   externalProvider: Provider | undefined;
   providerId: string = '';
 
-  constructor(private _queryCoordinator: QueryCoordinator) {
-    
-  }
+  constructor(private _queryCoordinator: QueryCoordinator) {}
 
   activate(params: any) {
     this.providerId = params.idp || '';
