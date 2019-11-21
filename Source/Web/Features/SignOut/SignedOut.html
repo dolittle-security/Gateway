@@ -7,27 +7,21 @@
 <template>
   <require from="./SignedOut.scss"></require>
 
-  <section class="signed-out">
-    <div style="background-color:black">
-      <h1>Signed Out</h1>
-
-      <h2 if.bind="externalProvider">
+  <section class="signed-out page-section">
+    <app-content title="Signed out">
+      <h3 if.bind="externalProvider">
         Do you also want to log out of
         <a href="/Dolittle/Sentry/Gateway/SignOut/External?idp=${externalProvider.id}" target="_top">${externalProvider.name}</a>
         ?
-      </h2>
-      <ul class="option-list">
-        <li repeat.for="tenant of tenants">
-          <a href="/Dolittle/Sentry/Gateway/PickTenant?rd=${redirectUrl}&tenant=${tenant.id}" target="_top">
-            <figure>
-              <!--<img src="#" alt="icon">-->
-            </figure>
-            <div>
-              <strong class="tenant-name">${tenant.name}</strong>
-            </div>
-          </a>
-        </li>
-      </ul>
-    </div>
+      </h3>
+      <div class="option-list">
+        <a href="/Dolittle/Sentry/Gateway/PickTenant?rd=${redirectUrl}&tenant=${tenant.id}" target="_top" repeat.for="tenant of tenants">
+          <figure>
+            <!--<img src="#" alt="icon">-->
+          </figure>
+          <spam>${tenant.name}</spam>
+        </a>
+      </div>
+    </app-content>
   </section>
 </template>
