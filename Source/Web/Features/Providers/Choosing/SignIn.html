@@ -1,23 +1,22 @@
+<!--
+*----------------------------------------------------------------------------------------------
+*  Copyright (c) Dolittle. All rights reserved.
+*  Licensed under the MIT License. See LICENSE in the project root for license information.
+*----------------------------------------------------------------------------------------------
+-->
 <template>
-        <require from="./SignIn.scss"></require>
-    
-        <section class="signin">
-            <div style="background-color:black">
-                <h1>Login</h1>
-                <h2>Choose preferred provider to login.</h2>
-                <ul class="option-list">
-                    <li repeat.for="provider of providers">
-                        
-                        <a href="/Dolittle/Sentry/Gateway/SignIn?ip=${provider.id}&rd=${redirectUrl}" target="_top">
-                            <figure>
-                                <!--<img src="#" alt="icon">-->
-                            </figure>
-                            <div>
-                                <strong class="provider-name">${provider.name}</strong>
-                            </div>
-                        </a>
-                    </li>                   
-                </ul>
-            </div>
-        </section>
-    </template>
+  <require from="./SignIn.scss"></require>
+
+  <div class="sign-in page-section">
+    <app-content title="Login" description="Choose preferred provider to login.">
+      <div class="provider-links">
+        <a class="option-link" href="/Dolittle/Sentry/Gateway/SignIn?ip=${provider.id}&rd=${redirectUrl}" target="_top" repeat.for="provider of providers">
+          <!-- <figure>
+            <img src="../../../assets/icons/32x32_favicon_darkblue.png" alt="icon" />
+          </figure> -->
+          <span>${provider.name}</span>
+        </a>
+      </div>
+    </app-content>
+  </div>
+</template>

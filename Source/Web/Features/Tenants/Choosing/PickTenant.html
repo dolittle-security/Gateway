@@ -1,23 +1,23 @@
+<!--
+*----------------------------------------------------------------------------------------------
+*  Copyright (c) Dolittle. All rights reserved.
+*  Licensed under the MIT License. See LICENSE in the project root for license information.
+*----------------------------------------------------------------------------------------------
+-->
 <template>
-    <require from="./PickTenant.scss"></require>
+  <require from="./PickTenant.scss"></require>
 
-    <section class="pick-tenant">
-        <div style="background-color:black">
-            <h1>Pick Tenant</h1>
-            <h2>Choose tenant to log into.</h2>
-            <ul class="option-list">
-                <li repeat.for="tenant of tenants">
+  <section class="pick-tenant page-section">
+    <app-content title="Pick Tenant" description="Choose tenant to log into.">
+      <div class="option-list">
+        <a class="option-link" href="/Dolittle/Sentry/Gateway/PickTenant?rd=${redirectUrl}&tenant=${tenant.id}" target="_top" repeat.for="tenant of tenants">
+          <!-- <figure>
+              <img src="#" alt="icon">
+            </figure>-->
 
-                    <a href="/Dolittle/Sentry/Gateway/PickTenant?rd=${redirectUrl}&tenant=${tenant.id}" target="_top">
-                        <figure>
-                            <!--<img src="#" alt="icon">-->
-                        </figure>
-                        <div>
-                            <strong class="tenant-name">${tenant.name}</strong>
-                        </div>
-                    </a>
-                </li>
-            </ul>
-        </div>
-    </section>
+          <span>${tenant.name}</span>
+        </a>
+      </div>
+    </app-content>
+  </section>
 </template>
