@@ -59,7 +59,7 @@ namespace Authentication.Frontend
             }
             try
             {
-                contents = _sharedFiles.ReadAllText($"./wwwroot/{file}");
+                contents = _sharedFiles.ReadAllText($"./wwwroot/default/{file}");
                 return true;
             }
             catch
