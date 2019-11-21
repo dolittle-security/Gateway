@@ -11,6 +11,13 @@ module.exports = (environment) => {
     }
     const config = upstreamConfig.apply(null, arguments);
     config.resolve.alias.DolittleStyles = path.resolve(__dirname, './Styles');
+    config.module.rules.unshift({
+        test: /environment\.json$/i,
+        use: [{
+            loader: 'app-settings-loader',
+            options: { env: environment && environment.production ? 'production' : 'development' },
+        }]
+    });
     return config;
 };
 
