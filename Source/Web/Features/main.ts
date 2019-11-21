@@ -4,7 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 import 'aurelia-dependency-injection';
 import { Aurelia } from 'aurelia-framework';
-import environment from './environment';
+import * as environment from './environment.json'
 import { PLATFORM } from 'aurelia-pal';
 import { QueryCoordinator } from '@dolittle/queries';
 import { QueryCoordinatorMock } from './QueryCoordinatorMock';

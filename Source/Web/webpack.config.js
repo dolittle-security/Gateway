@@ -2,42 +2,15 @@ const path = require('path');
 require('dotenv').config();
 const process = require('process');
 
-
 const webpack = require('@dolittle/typescript.webpack.aurelia').webpack
-const config = webpack(__dirname);
+const upstreamConfig = webpack(__dirname);
 
 module.exports = (environment) => {
     if (environment && environment.production) {
         process.env.DOLITTLE_WEBPACK_BASE_URL = '/signin/'
     }
-
-    const obj = config.apply(null, arguments);
-
-    let headers = {
-        'Portal-ID': '22222222-1a6f-40d7-b2fc-796dba92dc44',
-        'Portal-Domain': 'localhost',
-        'Owner-Tenant-ID': '445f8ea8-1a6f-40d7-b2fc-796dba92dc44'
-    };
-    obj.devServer = {
-        historyApiFallback: true,
-        proxy: {
-            '/auth': {
-                'target': 'http://localhost:5000',
-                'headers': headers
-            },
-            '/api': {
-                'target': 'http://localhost:5000',
-                'headers': headers
-            },
-            '/Dolittle': {
-                'target':'http://localhost:5000',
-                'headers': headers
-            }
-        }
-    };
-    obj.resolve.alias = {
-        DolittleStyles: path.resolve(__dirname, './Styles')
-    };
-    return obj;
+    const config = upstreamConfig.apply(null, arguments);
+    config.resolve.alias.DolittleStyles = path.resolve(__dirname, './Styles');
+    return config;
 };
 
