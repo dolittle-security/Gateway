@@ -34,7 +34,7 @@ namespace Authentication
             {
                 issuer = _portalManager.Current.SubDomain+"."+issuer;
             }
-            identity.AddClaim("iss",$"https://{issuer}/");
+            identity.AddClaim("iss",$"https://{issuer}"); // TODO: How do we sync this with the IdentityServer "GetIdentityServerIssuerUri()" ?
 
             identity.AddClaim("sub", user.Id.ToString());
 
