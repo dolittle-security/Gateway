@@ -3,11 +3,12 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 
-using Microsoft.AspNetCore.Authentication;
+using IdentityServerClient = IdentityServer4.Models.Client;
 
-namespace Authentication.Handlers
+namespace Read.Clients.Configuring
 {
-    public class IdentityTokenAuthenticationOptions : AuthenticationSchemeOptions
+    public interface IIdentityServerClientGenerator
     {
+        IdentityServerClient From(DeviceClient client);
     }
 }

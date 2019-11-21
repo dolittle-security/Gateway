@@ -10,7 +10,7 @@ namespace Authentication
         public const string ExternalCookieSchemeName = "Dolittle.External";
         public const string InternalCookieSchemeName = "Dolittle.Internal";
         public const string CompositeSchemeName = "Dolittle.Composite";
-        public const string IdentityTokenSchemeName = "Dolittle.Bearer";
+        public const string BearerTokenSchemeName = "Dolittle.Bearer";
 
 
         public const string IdentityAuthenticationType = "Dolittle.Security";

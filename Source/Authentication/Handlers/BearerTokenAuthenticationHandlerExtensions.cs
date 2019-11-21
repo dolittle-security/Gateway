@@ -8,11 +8,11 @@ using Microsoft.AspNetCore.Authentication;
 
 namespace Authentication.Handlers
 {
-    public static class IdentityTokenAuthenticationHandlerExtensions
+    public static class BearerTokenAuthenticationHandlerExtensions
     {
-        public static AuthenticationBuilder AddIdentityToken(this AuthenticationBuilder builder, string authenticationScheme, Action<IdentityTokenAuthenticationOptions> configureOptions = null)
+        public static AuthenticationBuilder AddBearerToken(this AuthenticationBuilder builder, string authenticationScheme, Action<BearerTokenAuthenticationOptions> configureOptions = null)
         {
-            return builder.AddScheme<IdentityTokenAuthenticationOptions,IdentityTokenAuthenticationHandler>(authenticationScheme, configureOptions);
+            return builder.AddScheme<BearerTokenAuthenticationOptions,BearerTokenAuthenticationHandler>(authenticationScheme, configureOptions);
         }
     }
 }

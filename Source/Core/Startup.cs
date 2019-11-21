@@ -6,7 +6,6 @@ using System.IdentityModel.Tokens.Jwt;
 using System.IO;
 using Autofac;
 using Context;
-using Core.Services;
 using Dolittle.Booting;
 using Dolittle.DependencyInversion.Autofac;
 using Microsoft.AspNetCore.Builder;
@@ -21,6 +20,9 @@ using Microsoft.AspNetCore.Http;
 using IdentityServer4.Configuration;
 using Core.IdentityServer;
 using Microsoft.AspNetCore.HttpOverrides;
+using IdentityServer4.Hosting;
+using Authentication.Middleware;
+using Microsoft.IdentityModel.Logging;
 
 namespace Core
 {
@@ -34,6 +36,11 @@ namespace Core
         {
             _hostingEnvironment = hostingEnvironment;
             _loggerFactory = loggerFactory;
+
+            if (hostingEnvironment.IsDevelopment())
+            {
+                IdentityModelEventSource.ShowPII = true;
+            }
         }
 
         public void ConfigureServices(IServiceCollection services)
@@ -60,7 +67,7 @@ namespace Core
 
             _bootResult = services.AddDolittle(_ => {
                 _.ExecutionContextSetup.TenantIdHeaderName = "Owner-Tenant-ID";
-                //_.ExecutionContextSetup.SkipAuthentication = true;
+                _.ExecutionContextSetup.SkipAuthentication = true;
             }, _loggerFactory);
         }
 
@@ -75,7 +82,7 @@ namespace Core
             });
             authentication.AddCookie(Constants.InternalCookieSchemeName);
             authentication.AddCookie(Constants.ExternalCookieSchemeName);
-            authentication.AddIdentityToken(Constants.IdentityTokenSchemeName);
+            authentication.AddBearerToken(Constants.BearerTokenSchemeName);
             authentication.AddComposite(Constants.CompositeSchemeName);
         }
 
@@ -92,7 +99,8 @@ namespace Core
             var server = services.AddIdentityServerBuilder();
             // server.AddCookieAuthentication();
             server.AddCoreServices();
-            server.AddDefaultEndpoints();
+            // server.AddDefaultEndpoints();
+            server.AddCustomEndpoints();
             server.AddPluggableServices();
             server.AddValidators();
             server.AddResponseGenerators();
@@ -100,11 +108,10 @@ namespace Core
             server.AddDefaultSecretValidators();
 
             server.AddInMemoryPersistedGrants();
+            /*
             server.AddResourceStore<ResourceStore>();
             server.AddClientStore<ClientStore>();
-            
-            // }).AddResourceStore<ResourceStore>().AddClientStore<ClientStore>();
-            // services.AddSingleton<IKeyMaterialService, KeyMaterialService>();
+            */
         }
 
 
@@ -117,8 +124,9 @@ namespace Core
         {
             app.UseForwardedHeaders();
             app.UsePortalContext();
+            app.UseMiddleware<AuthenticationHandlersMiddleware>();
             app.UseDolittle();
-            app.UseIdentityServer();
+            app.UseMiddleware<IdentityServerMiddleware>();
             app.UseMvc();
         }
     }

@@ -81,5 +81,16 @@ namespace Core.Pages
             }
             return Signin(rd);
         }
+
+        [HttpGet("Device")]
+        public async Task<IActionResult> Device()
+        {
+            var authResult = await HttpContext.AuthenticateAsync(Constants.InternalCookieSchemeName);
+            if (authResult.Succeeded)
+            {
+                return _frontend.DeviceSignIn(HttpContext);
+            }
+            return Signin("/signin/device");
+        }
     }
 }

@@ -13,6 +13,7 @@ namespace Authentication.Frontend
     {
         IActionResult ChooseProvider(HttpContext context);
         IActionResult ChooseTenant(HttpContext context);
+        IActionResult DeviceSignIn(HttpContext context);
         IActionResult SignedOut(HttpContext context);
         IActionResult SignedOut(HttpContext context, IdentityProviderId provider, string redirect);
         IActionResult SignOutExternalProvider(HttpContext context, IdentityProviderId provider);

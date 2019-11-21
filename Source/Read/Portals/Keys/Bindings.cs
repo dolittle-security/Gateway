@@ -5,15 +5,16 @@
 
 using Dolittle.DependencyInversion;
 using IdentityServer4.Services;
+using MongoDB.Bson.Serialization;
 
-namespace Core.IdentityServer
+namespace Read.Portals.Keys
 {
     public class Bindings : ICanProvideBindings
     {
         public void Provide(IBindingProviderBuilder builder)
         {
-            builder.Bind<IIdentityServerOptionsProvider>().To<IdentityServerOptionsProvider>();
-            builder.Bind<ITokenService>().To<TokenGenerator>();
+            builder.Bind<IKeyMaterialService>().To<PortalKeyMaterialService>();
+            BsonSerializer.RegisterSerializer(new RsaSecurityKeySerializer());
         }
     }
 }

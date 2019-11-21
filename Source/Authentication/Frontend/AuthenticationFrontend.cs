@@ -33,6 +33,12 @@ namespace Authentication.Frontend
             return IndexPage();
         }
 
+        public IActionResult DeviceSignIn(HttpContext context)
+        {
+            _logger.Information($"Serving the DeviceSignIn page");
+            return IndexPage();
+        }
+
         public IActionResult Error(HttpContext context)
         {
             _logger.Information($"Serving the Error page");

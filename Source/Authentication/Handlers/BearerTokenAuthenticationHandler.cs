@@ -10,27 +10,29 @@ using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 using IdentityServer4.Validation;
 using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.DataProtection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
 namespace Authentication.Handlers
 {
-    public class IdentityTokenAuthenticationHandler : AuthenticationHandler<IdentityTokenAuthenticationOptions>
+    public class BearerTokenAuthenticationHandler : AuthenticationHandler<BearerTokenAuthenticationOptions>
     {
-        readonly ITokenValidator _tokenValidator;
+        readonly ISecureDataFormat<AuthenticationTicket> _ticketDataFormat;
 
-        public IdentityTokenAuthenticationHandler(IOptionsMonitor<IdentityTokenAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, ITokenValidator tokenValidator)
+        public BearerTokenAuthenticationHandler(IOptionsMonitor<BearerTokenAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock, IDataProtectionProvider dataProtectionProvider)
             : base(options, logger, encoder, clock)
         {
-            _tokenValidator = tokenValidator;
+            var dataProtector = dataProtectionProvider.CreateProtector("Dolittle.Security");
+            _ticketDataFormat = new TicketDataFormat(dataProtector);
         }
 
-        protected override async Task<AuthenticateResult> HandleAuthenticateAsync()
+        protected override Task<AuthenticateResult> HandleAuthenticateAsync()
         {
             var authorization = Request.Headers["Authorization"].FirstOrDefault();
             if (string.IsNullOrEmpty(authorization))
             {
-                return AuthenticateResult.Fail("No Authorization Header is sent.");
+                return Task.FromResult(AuthenticateResult.Fail("No Authorization Header is sent."));
             }
 
             var token = "";
@@ -40,20 +42,17 @@ namespace Authentication.Handlers
             }
             if (string.IsNullOrEmpty(token))
             {
-                return AuthenticateResult.Fail("No Access Token is sent.");
+                return Task.FromResult(AuthenticateResult.Fail("No Access Token is sent."));
             }
 
-            var validationResult = await _tokenValidator.ValidateIdentityTokenAsync(token);
-            if (validationResult.IsError)
+            var ticket = _ticketDataFormat.Unprotect(token);
+            if (ticket == null)
             {
-                return AuthenticateResult.Fail(validationResult.Error);
+                return Task.FromResult(AuthenticateResult.Fail("Unprotect ticket failed"));
             }
-
-            return AuthenticateResult.Success(new AuthenticationTicket(
-                new ClaimsPrincipal(new ClaimsIdentity(validationResult.Claims, Scheme.Name)),
-                new AuthenticationProperties(),
-                Scheme.Name
-            ));
+            
+            // TODO: More verification of the ticket
+            return Task.FromResult(AuthenticateResult.Success(ticket));
         }
     }
 }

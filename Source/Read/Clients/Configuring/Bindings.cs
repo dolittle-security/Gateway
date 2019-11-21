@@ -5,15 +5,16 @@
 
 using Dolittle.DependencyInversion;
 using IdentityServer4.Services;
+using IdentityServer4.Stores;
 
-namespace Core.IdentityServer
+namespace Read.Clients.Configuring
 {
     public class Bindings : ICanProvideBindings
     {
         public void Provide(IBindingProviderBuilder builder)
         {
-            builder.Bind<IIdentityServerOptionsProvider>().To<IdentityServerOptionsProvider>();
-            builder.Bind<ITokenService>().To<TokenGenerator>();
+            builder.Bind<IClientStore>().To<ClientStore>();
+            builder.Bind<IResourceStore>().To<ResourceStore>();
         }
     }
 }

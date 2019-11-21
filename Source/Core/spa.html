@@ -28,6 +28,10 @@
                 });
             };
 
+            const device = () => {
+                $('div#device').show();
+            };
+
             const signedout = () => {
                 $('div#signedout').show();
             };
@@ -52,6 +56,9 @@
                     case '/signin/tenant':
                         selectTenant();
                         break;
+                    case '/signin/device':
+                        device();
+                        break;
                     case '/signin/error':
                         error();
                         break;
@@ -73,6 +80,13 @@
         <div id="select-tenant" style="display:none">
             <h1>Select tenant:</h1>
             <div id="tenant-list"></div>
+        </div>
+        <div id="device" style="display:none">
+            <h1>Enter device code:</h1>
+            <form action="/Dolittle/Sentry/Gateway/Device" method="POST">
+                <input type="text" name="usercode">
+                <input type="submit">
+            </form>
         </div>
         <div id="signedout" style="display:none">
             <h1>Signed out</h1>

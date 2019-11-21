@@ -17,7 +17,7 @@ namespace Authentication.Handlers
 {
     public class CompositeAuthenticationHandler : AuthenticationHandler<CompositeAuthenticationOptions>
     {
-        static readonly string[] schemes = { Constants.InternalCookieSchemeName, Constants.IdentityTokenSchemeName };
+        static readonly string[] schemes = { Constants.InternalCookieSchemeName, Constants.BearerTokenSchemeName };
 
         public CompositeAuthenticationHandler(IOptionsMonitor<CompositeAuthenticationOptions> options, ILoggerFactory logger, UrlEncoder encoder, ISystemClock clock) : base(options, logger, encoder, clock)
         {

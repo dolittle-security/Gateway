@@ -4,38 +4,42 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System.Collections.Generic;
+using System.Linq;
 using System.Threading.Tasks;
 using IdentityServer4.Models;
 using IdentityServer4.Stores;
 
-namespace Core.Services
+namespace Read.Clients.Configuring
 {
     public class ResourceStore : IResourceStore
     {
+        readonly Resources _resources;
+
+        public ResourceStore()
+        {
+            _resources = new Resources();
+            _resources.OfflineAccess = false;
+            _resources.IdentityResources.Add(new IdentityResources.OpenId());
+        }
+
         public Task<ApiResource> FindApiResourceAsync(string name)
         {
-            throw new System.NotImplementedException();
+            return Task.FromResult(_resources.ApiResources.Where(_ => _.Name == name).FirstOrDefault());
         }
 
         public Task<IEnumerable<ApiResource>> FindApiResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            return Task.FromResult<IEnumerable<ApiResource>>(new List<ApiResource>());
+            return Task.FromResult(_resources.ApiResources.Where(_ => scopeNames.Contains(_.Name)));
         }
 
         public Task<IEnumerable<IdentityResource>> FindIdentityResourcesByScopeAsync(IEnumerable<string> scopeNames)
         {
-            return Task.FromResult<IEnumerable<IdentityResource>>(new List<IdentityResource>() {
-                new IdentityResources.OpenId(),
-            });
+            return Task.FromResult(_resources.IdentityResources.Where(_ => scopeNames.Contains(_.Name)));
         }
 
         public Task<Resources> GetAllResourcesAsync()
         {
-            return Task.FromResult(new Resources {
-                IdentityResources = new IdentityResource[] {
-                    new IdentityResources.OpenId(),
-                },
-            });
+            return Task.FromResult(_resources);
         }
     }
 }
