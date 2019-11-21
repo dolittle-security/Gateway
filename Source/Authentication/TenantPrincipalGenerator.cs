@@ -6,6 +6,7 @@
 using System.Security.Claims;
 using Context;
 using Dolittle.Execution;
+using IdentityModel;
 using Microsoft.AspNetCore.Authentication;
 using Providers.Claims;
 using Read.Users;
@@ -34,13 +35,13 @@ namespace Authentication
             {
                 issuer = _portalManager.Current.SubDomain+"."+issuer;
             }
-            identity.AddClaim("iss",$"https://{issuer}"); // TODO: How do we sync this with the IdentityServer "GetIdentityServerIssuerUri()" ?
+            identity.AddClaim(JwtClaimTypes.Issuer, $"https://{issuer}"); // TODO: How do we sync this with the IdentityServer "GetIdentityServerIssuerUri()" ?
 
-            identity.AddClaim("sub", user.Id.ToString());
+            identity.AddClaim(JwtClaimTypes.Subject, user.Id.ToString());
 
             identity.AddClaim("tid", _tenantManager.Current.Tenant.ToString());
 
-            identity.AddClaim("iat", _clock.UtcNow.ToUnixTimeSeconds().ToString());
+            identity.AddClaim(new Claim(JwtClaimTypes.IssuedAt, _clock.UtcNow.ToUnixTimeSeconds().ToString(), ClaimValueTypes.Integer));
 
             // TODO: Add any additional claims the principal should have based on portal configuration
 
