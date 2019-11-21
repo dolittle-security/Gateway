@@ -37,6 +37,7 @@ namespace Read.Portals.UserMapping
             switch (tenantMappings.Count())
             {
                 case 0:
+                _logger.Information($"No mapping for portal:'{portal}', provider:'{provider}', subject:'{subject}'.");
                 return Enumerable.Empty<TenantId>();
 
                 case 1:
