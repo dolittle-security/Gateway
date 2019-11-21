@@ -33,6 +33,7 @@ namespace Read.Users
             switch (userMappings.Count())
             {
                 case 0:
+                _logger.Information($"No user mapping found for provider:'{provider}' subject:'{subject}' was found.");
                 return false;
 
                 case 1:
