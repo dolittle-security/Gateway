@@ -4,6 +4,7 @@
  *--------------------------------------------------------------------------------------------*/
 
 using System;
+using System.Collections.Generic;
 using System.Linq;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -40,6 +41,7 @@ namespace Core.IdentityServer
                 Claims = request.Subject.Claims.ToList(),
                 ClientId = request.ValidatedRequest.ClientId,
                 AccessTokenType = request.ValidatedRequest.AccessTokenType,
+                Audiences = new List<string> { request.ValidatedRequest.ClientId },
             });
         }
 
@@ -53,6 +55,7 @@ namespace Core.IdentityServer
                 Claims = request.Subject.Claims.ToList(),
                 ClientId = request.ValidatedRequest.ClientId,
                 AccessTokenType = request.ValidatedRequest.AccessTokenType,
+                Audiences = new List<string> { request.ValidatedRequest.ClientId },
             });
         }
 
