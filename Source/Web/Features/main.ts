@@ -23,5 +23,5 @@ export function configure(aurelia: Aurelia) {
     aurelia.container.registerInstance(QueryCoordinator, queryCoordinatorMock);
   }
 
-  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('App')));
+  aurelia.start().then(() => aurelia.setRoot(PLATFORM.moduleName('app')));
 }

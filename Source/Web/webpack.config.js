@@ -36,7 +36,7 @@ module.exports = (environment) => {
         }
     };
     obj.resolve.alias = {
-        DolittleStyles: path.resolve(__dirname, './styles')
+        DolittleStyles: path.resolve(__dirname, './Styles')
     };
     return obj;
 };
