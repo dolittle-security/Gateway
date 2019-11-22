@@ -102,21 +102,14 @@ namespace Core.Pages
         }
 
         [HttpGet("Device")]
-        public async Task<IActionResult> Device(string userCode)
+        public async Task<IActionResult> Device()
         {
             var authResult = await HttpContext.AuthenticateAsync(Constants.InternalCookieSchemeName);
             if (authResult.Succeeded)
             {
-                if (!string.IsNullOrWhiteSpace(userCode))
-                {
-                    return await _deviceAuthorizer.HandleAsync(HttpContext, userCode);
-                }
-                else
-                {
-                    return _frontend.DeviceSignIn(HttpContext);
-                }
+                return _frontend.DeviceSignIn(HttpContext);
             }
-            return Signin("/signin/device?userCode="+userCode);
+            return Signin(Request.Path);
         }
     }
 }
