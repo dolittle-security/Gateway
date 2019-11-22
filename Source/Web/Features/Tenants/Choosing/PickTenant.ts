@@ -9,7 +9,7 @@ import { Tenant } from './Tenant';
 import { Router } from 'aurelia-router';
 
 @autoinject
-export class SignIn {
+export class PickTenant {
   tenants: Tenant[] = [];
   redirectUrl: string = '';
 
