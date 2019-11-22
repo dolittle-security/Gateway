@@ -8,10 +8,10 @@
   <require from="./Authorize.scss"></require>
 
   <section class="device-authorize page-section">
-    <app-content title="Auhtorize device">
+    <app-content title="Authorize device">
       Type the user code provided by the device in the field below to sign it in with your credentials:
       <form role="form" submit.delegate="authorize()">
-        <input type="text" value.bind="userCode" placeholder="User Code" />
+        <input type="text" value.bind="_userCode" placeholder="User Code" />
         <button type="submit">Authorize</button>
       </form>
     </app-content>
