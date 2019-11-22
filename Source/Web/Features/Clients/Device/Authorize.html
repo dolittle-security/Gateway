@@ -1,0 +1,19 @@
+<!--
+*----------------------------------------------------------------------------------------------
+*  Copyright (c) Dolittle. All rights reserved.
+*  Licensed under the MIT License. See LICENSE in the project root for license information.
+*----------------------------------------------------------------------------------------------
+-->
+<template>
+  <require from="./Authorize.scss"></require>
+
+  <section class="device-authorize page-section">
+    <app-content title="Auhtorize device">
+      Type the user code provided by the device in the field below to sign it in with your credentials:
+      <form role="form" submit.delegate="authorize()">
+        <input type="text" value.bind="userCode" placeholder="User Code" />
+        <button type="submit">Authorize</button>
+      </form>
+    </app-content>
+  </section>
+</template>

@@ -30,3 +30,14 @@ export function registerAvailableTenants(queryCoordinator: QueryCoordinatorMock)
     ] as unknown) as ReadModel[];
   });
 }
+
+export function registerExternalProvider(queryCoordinator: QueryCoordinatorMock): void {
+  queryCoordinator.registerQueryHandler('ExternalProvider', () => {
+    return ([
+      {
+        id: '00',
+        name: 'Provider 1'
+      }
+    ] as unknown) as ReadModel[];
+  })
+}
