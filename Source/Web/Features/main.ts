@@ -26,6 +26,7 @@ export function configure(aurelia: Aurelia) {
     aurelia.container.registerInstance(QueryCoordinator, queryCoordinatorMock);
     aurelia.container.registerSingleton(CommandCoordinator, CommandCoordinatorMock);
   } else {
+    CommandCoordinator.apiBaseUrl = '/api/Dolittle/Security/Gateway/';
     QueryCoordinator.apiBaseUrl = '/api/Dolittle/Security/Gateway/';
   }
 
