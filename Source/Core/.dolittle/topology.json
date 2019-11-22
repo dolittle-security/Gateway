@@ -22,6 +22,15 @@
     "c87093fd-7ba0-459c-a5a6-e69930af642c": {
       "name": "SignOut",
       "subFeatures": {}
+    },
+    "e911a8fa-d755-4443-b22f-0a8a7efee9bb": {
+      "name": "Clients",
+      "subFeatures": {
+        "217a8d0e-7ba3-4b53-b388-d2bcbcb254cb": {
+          "name": "Device",
+          "subFeatures": {}
+        }
+      }
     }
   }
 }

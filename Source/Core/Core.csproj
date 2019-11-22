@@ -17,6 +17,7 @@
 
     <ItemGroup>
         <ProjectReference Include="../Authentication/Authentication.csproj" />
+        <ProjectReference Include="../Domain/Domain.csproj" />
         <ProjectReference Include="../Read/Read.csproj" />
         <ProjectReference Include="../Providers/Providers.csproj" />
     </ItemGroup>

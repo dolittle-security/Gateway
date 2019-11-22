@@ -8,7 +8,9 @@ import * as environment from './environment.json'
 import { PLATFORM } from 'aurelia-pal';
 import { QueryCoordinator } from '@dolittle/queries';
 import { QueryCoordinatorMock } from './QueryCoordinatorMock';
+import { CommandCoordinatorMock } from './CommandCoordinatorMock';
 import { registerProvidersForPortal, registerAvailableTenants, registerExternalProvider } from './MockData';
+import { CommandCoordinator } from '@dolittle/commands';
 
 require('../Styles/style.scss');
 
@@ -22,6 +24,7 @@ export function configure(aurelia: Aurelia) {
     registerAvailableTenants(queryCoordinatorMock);
     registerExternalProvider(queryCoordinatorMock);
     aurelia.container.registerInstance(QueryCoordinator, queryCoordinatorMock);
+    aurelia.container.registerSingleton(CommandCoordinator, CommandCoordinatorMock);
   } else {
     QueryCoordinator.apiBaseUrl = '/api/Dolittle/Security/Gateway/';
   }
