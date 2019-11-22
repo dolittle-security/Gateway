@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Providers", "Providers\Prov
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Authentication", "Authentication\Authentication.csproj", "{54ABCFC7-4D04-4DB3-846B-F8D44769F787}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Domain", "Domain\Domain.csproj", "{35287E77-3188-40F7-A6A7-A7B32272233F}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -114,5 +116,17 @@ Global
 		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x64.Build.0 = Release|Any CPU
 		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x86.ActiveCfg = Release|Any CPU
 		{54ABCFC7-4D04-4DB3-846B-F8D44769F787}.Release|x86.Build.0 = Release|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Debug|x64.Build.0 = Debug|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Debug|x86.Build.0 = Debug|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Release|Any CPU.Build.0 = Release|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Release|x64.ActiveCfg = Release|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Release|x64.Build.0 = Release|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Release|x86.ActiveCfg = Release|Any CPU
+		{35287E77-3188-40F7-A6A7-A7B32272233F}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 EndGlobal
