@@ -1,0 +1,21 @@
+{
+  "name": "dolittle-security-gateway-development",
+  "version": "1.0.0",
+  "main": "main.ts",
+  "author": "Dolittle",
+  "license": "MIT",
+  "private": true,
+  "scripts": {
+    "start": "ts-node main.ts"
+  },
+  "dependencies": {
+    "express": "^4.17.1",
+    "guid-typescript": "^1.0.9",
+    "mongodb": "^3.3.5",
+    "oidc-provider": "^6.16.1",
+    "typescript": "^3.7.2"
+  },
+  "devDependencies": {
+    "ts-node": "^8.5.2"
+  }
+}
