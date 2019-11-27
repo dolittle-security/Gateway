@@ -6,7 +6,6 @@ import { autoinject } from 'aurelia-dependency-injection';
 import { QueryCoordinator } from '@dolittle/queries';
 import { ProvidersForPortal } from './ProvidersForPortal';
 import { IdentityProviderForChoosing } from './IdentityProviderForChoosing';
-import './SignIn.scss';
 
 @autoinject
 export class SignIn {

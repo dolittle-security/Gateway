@@ -3,7 +3,6 @@
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
 import { autoinject } from 'aurelia-dependency-injection';
-import './home.scss';
 
 @autoinject
 export class Home {

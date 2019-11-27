@@ -80,9 +80,9 @@
     aurelia-webpack-plugin "^4.0.0"
 
 "@dolittle/typescript.webpack@^1.0.0":
-  version "1.2.7"
-  resolved "https://registry.yarnpkg.com/@dolittle/typescript.webpack/-/typescript.webpack-1.2.7.tgz#3fc2b2085c83e234ab9b93d2b7fa5ed3f622ce47"
-  integrity sha512-1YGzFuKGcs3J5taLdct5StlJgq9RIJM3IZ2v/X8dcsSOt6Rgx8IgRQ4Og93Y1aHvN9xFYsLwfiJyonVtJfZJWw==
+  version "1.2.8"
+  resolved "https://registry.yarnpkg.com/@dolittle/typescript.webpack/-/typescript.webpack-1.2.8.tgz#b38fc6081ba848766a20aec4eb322629ce341343"
+  integrity sha512-esehkOigC5WEJJFii9mpaZHj//OIHu/7H4gu9pJ/DKRGLolYgmz2k07inF3Llr7m+djEEGMOYhrpoQ6AeKG+Gg==
   dependencies:
     app-settings-loader "^1.0.2"
     autoprefixer "^9.7.1"

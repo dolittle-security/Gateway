@@ -7,7 +7,6 @@ import { CommandCoordinator } from '@dolittle/commands';
 import { AuthorizeDeviceWithUserCode } from './AuthorizeDeviceWithUserCode';
 import { Router } from 'aurelia-router';
 import { CommandCoordinatorMock } from '../../CommandCoordinatorMock';
-import './Authorize.scss';
 
 @autoinject
 export class Authorize {
