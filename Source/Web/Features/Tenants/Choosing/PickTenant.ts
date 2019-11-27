@@ -7,6 +7,7 @@ import { QueryCoordinator } from '@dolittle/queries';
 import { AvailableTenants } from './AvailableTenants';
 import { Tenant } from './Tenant';
 import { Router } from 'aurelia-router';
+import './PickTenant.scss';
 
 @autoinject
 export class PickTenant {
