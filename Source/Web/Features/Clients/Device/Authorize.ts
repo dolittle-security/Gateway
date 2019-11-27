@@ -2,18 +2,17 @@
  *  Copyright (c) Dolittle. All rights reserved.
  *  Licensed under the MIT License. See LICENSE in the project root for license information.
  *--------------------------------------------------------------------------------------------*/
-import { autoinject, inject } from 'aurelia-dependency-injection';
+import { autoinject } from 'aurelia-dependency-injection';
 import { CommandCoordinator } from '@dolittle/commands';
 import { AuthorizeDeviceWithUserCode } from './AuthorizeDeviceWithUserCode';
-import { Router, RouterConfiguration } from 'aurelia-router';
-import { PLATFORM } from 'aurelia-pal';
+import { Router } from 'aurelia-router';
 import { CommandCoordinatorMock } from '../../CommandCoordinatorMock';
 
 @autoinject
 export class Authorize {
   private _userCode = '';
 
-  constructor(private _router: Router, private _commandCoordinator: CommandCoordinator) { }
+  constructor(private _router: Router, private _commandCoordinator: CommandCoordinator) {}
 
   activate(params: any) {
     if (params.userCode) {
@@ -21,14 +20,13 @@ export class Authorize {
     }
   }
 
-  async authorize() { 
+  async authorize() {
     let command = new AuthorizeDeviceWithUserCode();
     command.userCode = this._userCode;
-    CommandCoordinatorMock.failMe = true
+    CommandCoordinatorMock.failMe = true;
     let commandResult = await this._commandCoordinator.handle(command);
     if (commandResult.success) {
       this._router.navigate('/signin/device/success');
-    }
-    else this._router.navigate('/signin/device/failed');
+    } else this._router.navigate('/signin/device/failed');
   }
 }
